@@ -4,7 +4,7 @@ import org.holicc.model.ListNode;
 
 import java.util.Objects;
 
-public class DeleteLinkedListNode {
+public class LinkList {
 
 
     /**
