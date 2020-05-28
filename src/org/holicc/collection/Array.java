@@ -45,21 +45,29 @@ public class Array {
 
     /**
      * 圆圈中最后剩下的数字
+     * 时间复杂度O(n)
+     * 空间复杂度O(n)
      * <p>
      * https://leetcode-cn.com/problems/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof/
      */
-    public int lastRemaining(int n, int m) {
-        int[] ary = new int[n];
-        for (int i = 0; i < n; i++) {
-            ary[i] = i;
-        }
-        //
-        int i = 0;
-        while (n-- > 0) {
-            while (ary[i++ + m] != -1) { }
-            if (i >= n) i = 0;
-        }
-        return ary[i];
+    public int lastRemaining_01(int n, int m) {
+        if (n == 1) return 0;
+        int x = lastRemaining_01(n - 1, m);
+        return (m + x) % n;
+    }
+
+    /**
+     * 圆圈中最后剩下的数字
+     * 时间复杂度O(n)
+     * 空间复杂度O(1)
+     * <p>
+     * https://leetcode-cn.com/problems/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof/
+     */
+    public int lastRemaining_02(int n, int m) {
+        int f = 0;
+        for (int i = 2; i != n + 1; ++i)
+            f = (m + f) % i;
+        return f;
     }
 
 }
