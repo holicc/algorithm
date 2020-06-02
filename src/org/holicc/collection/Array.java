@@ -1,5 +1,7 @@
 package org.holicc.collection;
 
+import java.util.Arrays;
+
 public class Array {
 
     /**
@@ -146,5 +148,33 @@ public class Array {
             else return new int[]{nums[i], nums[j]};
         }
         return new int[0];
+    }
+
+
+    /**
+     * 数组中重复的数字
+     * 时间复杂度 O(n log(n))
+     * <p>
+     * https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/
+     */
+    public int findRepeatNumber(int[] nums) {
+        Arrays.sort(nums);
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i - 1] == nums[i]) {
+                return nums[i];
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * 数组中出现次数超过一半的数字
+     * 时间复杂度 O(n log(n))
+     * <p>
+     * https://leetcode-cn.com/problems/shu-zu-zhong-chu-xian-ci-shu-chao-guo-yi-ban-de-shu-zi-lcof/
+     */
+    public int majorityElement(int[] nums) {
+        Arrays.sort(nums);
+        return nums[nums.length / 2];
     }
 }
