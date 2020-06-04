@@ -1,6 +1,8 @@
 package org.holicc.collection;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Array {
 
@@ -177,4 +179,60 @@ public class Array {
         Arrays.sort(nums);
         return nums[nums.length / 2];
     }
+
+    /**
+     * 和为s的连续正数序列
+     * 时间复杂度 O(n^2)
+     * <p>
+     * https://leetcode-cn.com/problems/he-wei-sde-lian-xu-zheng-shu-xu-lie-lcof/
+     */
+    public int[][] findContinuousSequence_01(int target) {
+        List<int[]> r = new ArrayList<>();
+        for (int i = 1; i + 2 < target; i++) {
+            List<Integer> t = new ArrayList<>();
+            int sum = 0;
+            for (int j = i; sum <= target; j++) {
+                sum += j;
+                t.add(j);
+                if (sum == target) break;
+            }
+            if (sum == target) {
+                //
+                int[] ary = new int[t.size()];
+                for (int k = 0; k < ary.length; k++) {
+                    ary[k] = t.get(k);
+                }
+                //
+                r.add(ary);
+            }
+        }
+        return r.toArray(new int[0][0]);
+    }
+
+
+    /**
+     * 和为s的连续正数序列
+     * 时间复杂度 O(n)
+     * 使用数列求和公式 S(10)=(1+10)*(10)/2
+     * <p>
+     * https://leetcode-cn.com/problems/he-wei-sde-lian-xu-zheng-shu-xu-lie-lcof/
+     */
+    public int[][] findContinuousSequence_02(int target) {
+        List<int[]> r = new ArrayList<>();
+        for (int i = 1, j = 2; i < j; ) {
+            int sum = (i + j) * (j - i + 1) / 2;
+            if (sum < target) j++;
+            else if (sum > target) i++;
+            else {
+                int[] t = new int[j - i + 1];
+                for (int n = i, k = 0; k < t.length; k++, n++) {
+                    t[k] = n;
+                }
+                r.add(t);
+                i++;
+            }
+        }
+        return r.toArray(new int[0][0]);
+    }
+
 }
