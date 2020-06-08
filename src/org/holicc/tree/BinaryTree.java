@@ -2,10 +2,7 @@ package org.holicc.tree;
 
 import org.holicc.model.TreeNode;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class BinaryTree {
 
@@ -52,4 +49,26 @@ public class BinaryTree {
         return res;
     }
 
+    /**
+     * 二叉搜索树的第k大节点
+     * 时间复杂度 O(n log(n))
+     * <p>
+     * https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-di-kda-jie-dian-lcof/
+     */
+    public int kthLargest(TreeNode root, int k) {
+        Stack<TreeNode> stack = new Stack<>();
+        while (root != null || !stack.isEmpty()) {
+            if (root != null) {
+                stack.push(root);
+                root = root.right;
+            } else {
+                TreeNode pop = stack.pop();
+                if (--k == 0) return pop.val;
+                if (pop.left != null) {
+                    root = pop.left;
+                }
+            }
+        }
+        return -1;
+    }
 }
