@@ -3,6 +3,7 @@ package org.holicc.collection;
 import org.holicc.model.ListNode;
 
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Objects;
 import java.util.Set;
 
@@ -101,6 +102,48 @@ public class LinkList {
         }
         t.next = l1 != null ? l1 : l2;
         return root.next;
+    }
+
+    /**
+     * 反转链表
+     * 时间复杂度 O(n)
+     * 空间复杂度 O(1)
+     * <p>
+     * https://leetcode-cn.com/problems/fan-zhuan-lian-biao-lcof/
+     */
+    public ListNode reverseList(ListNode head) {
+        if (head == null) return null;
+        ListNode pre = null;
+        ListNode t = head;
+        while (t != null) {
+            ListNode next = t.next;
+            t.next = pre;
+            pre = t;
+            t = next;
+        }
+        return pre;
+    }
+
+    /**
+     * 从尾到头打印链表
+     * 时间复杂度 O(n)
+     * 空间复杂度 O(n)
+     * <p>
+     * https://leetcode-cn.com/problems/cong-wei-dao-tou-da-yin-lian-biao-lcof/
+     */
+    public int[] reversePrint(ListNode head) {
+        if (head == null) return new int[0];
+        LinkedList<Integer> queue = new LinkedList<>();
+        while (head != null) {
+            queue.addFirst(head.val);
+            head = head.next;
+        }
+        //
+        int[] r = new int[queue.size()];
+        for (int i = 0; i < queue.size(); i++) {
+            r[i] = queue.get(i);
+        }
+        return r;
     }
 
 }
