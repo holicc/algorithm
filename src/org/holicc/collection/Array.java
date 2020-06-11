@@ -6,6 +6,10 @@ import java.util.List;
 
 public class Array {
 
+    public static void main(String[] args) {
+        System.out.println(Math.pow(10, 3) - 1);
+    }
+
     /**
      * 连续子数组的最大和
      * 时间复杂度 O(n^2)
@@ -233,6 +237,22 @@ public class Array {
             }
         }
         return r.toArray(new int[0][0]);
+    }
+
+    /**
+     * 打印从1到最大的n位数
+     * 时间复杂度 O(n)
+     * 空间复杂度 O(10^n)
+     * <p>
+     * https://leetcode-cn.com/problems/da-yin-cong-1dao-zui-da-de-nwei-shu-lcof/
+     */
+    public int[] printNumbers(int n) {
+        int size = (int) (Math.pow(10, n) - 1);
+        int[] r = new int[size];
+        for (int i = 0; i < r.length; i++) {
+            r[i] = i + 1;
+        }
+        return r;
     }
 
 }

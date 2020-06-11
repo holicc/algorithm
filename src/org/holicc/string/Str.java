@@ -2,7 +2,7 @@ package org.holicc.string;
 
 import java.util.Objects;
 
-public class DistinctionStr {
+public class Str {
 
     /**
      * 第一个只出现一次的字符
@@ -23,6 +23,15 @@ public class DistinctionStr {
             if (table[c - 'a'] == 1) return c;
         }
         return ' ';
+    }
+
+    /**
+     * 替换空格
+     * <p>
+     * https://leetcode-cn.com/problems/ti-huan-kong-ge-lcof/
+     */
+    public String replaceSpace(String s) {
+        return s == null ? null : s.replaceAll(" ", "%20");
     }
 
 }
