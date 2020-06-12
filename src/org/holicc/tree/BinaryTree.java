@@ -71,4 +71,48 @@ public class BinaryTree {
         }
         return -1;
     }
+
+    /**
+     * 二叉树的深度
+     * 时间复杂度 O(log(n))
+     * <p>
+     * https://leetcode-cn.com/problems/er-cha-shu-de-shen-du-lcof/
+     */
+    public int maxDepth(TreeNode root) {
+        if (root == null) return 0;
+        return Math.max(deep(root.left, 1), deep(root.right, 1));
+    }
+
+    private int deep(TreeNode root, int i) {
+        if (root == null) return i;
+        return Math.max(deep(root.left, i + 1), deep(root.right, i + 1));
+    }
+
+    /**
+     * 二叉树的镜像
+     * 时间复杂度 O(log(n))
+     * <p>
+     * https://leetcode-cn.com/problems/er-cha-shu-de-jing-xiang-lcof/
+     */
+    public TreeNode mirrorTree_01(TreeNode root) {
+        if (root == null) return null;
+        TreeNode tmp = root.left;
+        root.left = mirrorTree_01(root.right);
+        root.right = mirrorTree_01(tmp);
+        return root;
+    }
+
+    public TreeNode mirrorTree_02(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+        if (root != null) stack.push(root);
+        while (!stack.isEmpty()) {
+            TreeNode pop = stack.pop();
+            if (pop.left != null) stack.push(pop.left);
+            if (pop.right != null) stack.push(pop.right);
+            TreeNode t = pop.left;
+            pop.left = pop.right;
+            pop.right = t;
+        }
+        return root;
+    }
 }
