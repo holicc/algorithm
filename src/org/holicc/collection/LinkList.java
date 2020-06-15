@@ -146,4 +146,41 @@ public class LinkList {
         return r;
     }
 
+    /**
+     * 链表中倒数第k个节点
+     * <p>
+     * https://leetcode-cn.com/problems/lian-biao-zhong-dao-shu-di-kge-jie-dian-lcof/
+     */
+    public ListNode getKthFromEnd(ListNode head, int k) {
+        if (head == null) return null;
+        //
+        ListNode t = head;
+        ListNode p = t;
+        //k
+        while (k-- > 0) {
+            t = t.next;
+        }
+        //
+        while (t != null) {
+            t = t.next;
+            p = p.next;
+        }
+        return p;
+    }
+
+    /**
+     * 左旋转字符串
+     * 时间复杂度 O(n)
+     * 空间复杂度 O(n)
+     * <p>
+     * https://leetcode-cn.com/problems/zuo-xuan-zhuan-zi-fu-chuan-lcof/
+     */
+    public String reverseLeftWords_01(String s, int n) {
+        if (s == null || s.equals("")) return null;
+        StringBuilder builder = new StringBuilder(s);
+        for (int i = 0; i < n; i++) {
+            builder.append(builder.charAt(i));
+        }
+        return builder.delete(0, n).toString();
+    }
 }
