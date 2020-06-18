@@ -102,6 +102,12 @@ public class BinaryTree {
         return root;
     }
 
+    /**
+     * 二叉树的镜像
+     * 时间复杂度 O(log(n))
+     * <p>
+     * https://leetcode-cn.com/problems/er-cha-shu-de-jing-xiang-lcof/
+     */
     public TreeNode mirrorTree_02(TreeNode root) {
         Stack<TreeNode> stack = new Stack<>();
         if (root != null) stack.push(root);
@@ -114,5 +120,19 @@ public class BinaryTree {
             pop.right = t;
         }
         return root;
+    }
+
+    /**
+     * 平衡二叉树
+     * 时间复杂度 O(n log(n))
+     * 空间复杂度 O(n)
+     * <p>
+     * https://leetcode-cn.com/problems/ping-heng-er-cha-shu-lcof/
+     */
+    public boolean isBalanced(TreeNode root) {
+        if (root == null) return true;
+        return Math.abs(deep(root.left, 1) - deep(root.right, 1)) <= 1
+                && isBalanced(root.left)
+                && isBalanced(root.right);
     }
 }
