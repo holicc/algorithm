@@ -135,4 +135,25 @@ public class BinaryTree {
                 && isBalanced(root.left)
                 && isBalanced(root.right);
     }
+
+    /**
+     * 对称的二叉树
+     * 时间复杂度 O(n log(n))
+     * 空间复杂度 O(n)
+     * <p>
+     * https://leetcode-cn.com/problems/dui-cheng-de-er-cha-shu-lcof/
+     */
+    public boolean isSymmetric(TreeNode root) {
+        if (root == null) return true;
+        //
+        return isSymmetric(root.left, root.right);
+    }
+
+    private boolean isSymmetric(TreeNode left, TreeNode right) {
+        if (left == null && right == null) return true;
+        if (left == null || right == null) return false;
+        if (left.val != right.val) return false;
+        return isSymmetric(left.left, right.right)
+                && isSymmetric(left.right, right.left);
+    }
 }
