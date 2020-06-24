@@ -1,8 +1,6 @@
 package org.holicc.collection;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Array {
 
@@ -356,5 +354,35 @@ public class Array {
             r[i] *= t;
         }
         return r;
+    }
+
+    /**
+     * 在排序数组中查找数字 I
+     * <p>
+     * https://leetcode-cn.com/problems/zai-pai-xu-shu-zu-zhong-cha-zhao-shu-zi-lcof/
+     */
+    public int search_01(int[] nums, int target) {
+        if (nums.length == 0) return 0;
+        Map<Integer, Integer> table = new HashMap<>();
+        //
+        for (int num : nums) {
+            table.put(num, table.getOrDefault(num, 0) + 1);
+        }
+        //
+        return table.getOrDefault(target, 0);
+    }
+
+    public int search(int[] nums, int target) {
+        return helper(nums, target) - helper(nums, target - 1);
+    }
+
+    int helper(int[] nums, int tar) {
+        int i = 0, j = nums.length - 1;
+        while (i <= j) {
+            int m = (i + j) / 2;
+            if (nums[m] <= tar) i = m + 1;
+            else j = m - 1;
+        }
+        return i;
     }
 }
