@@ -1,6 +1,7 @@
 package org.holicc.collection;
 
 import java.util.*;
+import java.util.stream.IntStream;
 
 public class Array {
 
@@ -384,5 +385,22 @@ public class Array {
             else j = m - 1;
         }
         return i;
+    }
+
+    /**
+     * 旋转数组的最小数字
+     * <p>
+     * https://leetcode-cn.com/problems/xuan-zhuan-shu-zu-de-zui-xiao-shu-zi-lcof/
+     */
+    public int minArray(int[] numbers) {
+        return IntStream.of(numbers).min().orElse(-1);
+    }
+
+    public int minArray_01(int[] numbers) {
+        for (int i = numbers.length - 1; i >= 0; i--) {
+            if (i == 0) return numbers[i];
+            if (numbers[i - 1] > numbers[i]) return numbers[i - 1];
+        }
+        return -1;
     }
 }
