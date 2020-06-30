@@ -442,4 +442,28 @@ public class Array {
         }
         return sum - real;
     }
+
+    /**
+     * 扑克牌中的顺子
+     * 时间复杂度 O (log(n)
+     * 空间发展度 O (1)
+     * <p>
+     * https://leetcode-cn.com/problems/bu-ke-pai-zhong-de-shun-zi-lcof/
+     */
+    public boolean isStraight(int[] nums) {
+        int zero = 0;
+        int tmp = -1;
+        Arrays.sort(nums);
+        for (int num : nums) {
+            if (zero < 0) return false;
+            if (num == 0) {
+                zero++;
+            } else {
+                if (tmp == num) return false;
+                if (tmp != -1) zero -= (Math.abs(num - tmp) - 1);
+                tmp = num;
+            }
+        }
+        return zero >= 0;
+    }
 }
