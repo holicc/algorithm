@@ -466,4 +466,59 @@ public class Array {
         }
         return zero >= 0;
     }
+
+    /**
+     * 滑动窗口的最大值
+     * 时间复杂 O( n^k)
+     * 空间复杂度 O(n)
+     * <p>
+     * https://leetcode-cn.com/problems/hua-dong-chuang-kou-de-zui-da-zhi-lcof/
+     */
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        if (nums.length == 0) return new int[0];
+        int[] r = new int[nums.length - k + 1];
+        for (int i = 0; i < r.length; i++) {
+            int max = Integer.MIN_VALUE;
+            for (int j = i; j < i + k; j++) {
+                max = Math.max(max, nums[j]);
+            }
+            r[i] = max;
+        }
+        return r;
+    }
+
+    public int[] maxSlidingWindow_01(int[] nums, int k) {
+        if (nums.length == 0) return new int[0];
+        //
+        int[] r = new int[nums.length - k + 1];
+        for (int i = 0, j = k - 1, maxIndex = -1, max = Integer.MIN_VALUE; j < nums.length; i++, j++) {
+            if (maxIndex == -1) {
+                maxIndex = findMaxIndex(nums, i, j);
+                max = nums[maxIndex];
+            } else {
+                //
+                if (maxIndex >= i && maxIndex <= j) {
+                    max = Math.max(max, nums[j]);
+                } else {
+                    maxIndex = findMaxIndex(nums, i, j);
+                    max = nums[maxIndex];
+                }
+            }
+            //
+            r[i] = max;
+        }
+        return r;
+    }
+
+    private int findMaxIndex(int[] nums, int i, int j) {
+        int max = Integer.MIN_VALUE;
+        int maxIndex = -1;
+        for (int l = i; l <= j; l++) {
+            if (max < nums[l]) {
+                maxIndex = l;
+                max = nums[l];
+            }
+        }
+        return maxIndex;
+    }
 }
