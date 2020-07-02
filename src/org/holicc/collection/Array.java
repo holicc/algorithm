@@ -521,4 +521,61 @@ public class Array {
         }
         return maxIndex;
     }
+
+    /**
+     * 青蛙跳台阶问题
+     * <p>
+     * https://leetcode-cn.com/problems/qing-wa-tiao-tai-jie-wen-ti-lcof/
+     */
+    public int numWays(int n) {
+        int a = 1, b = 1, sum;
+        for (int i = 0; i < n; i++) {
+            sum = (a + b) % 1000000007;
+            a = b;
+            b = sum;
+        }
+        return a;
+    }
+
+    /**
+     * 二维数组中的查找
+     * 时间复杂度 O(n^2)
+     * 空间复杂度 O(1)
+     * <p>
+     * https://leetcode-cn.com/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/
+     */
+    public boolean findNumberIn2DArray(int[][] matrix, int target) {
+        if (matrix.length == 0) return false;
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                if (matrix[i][j] == target) return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 二维数组中的查找
+     * 时间复杂度 O(n)
+     * 空间复杂度 O(1)
+     * <p>
+     * https://leetcode-cn.com/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/
+     */
+    public boolean findNumberIn2DArray_01(int[][] matrix, int target) {
+        if (matrix.length == 0) return false;
+        int rows = matrix.length, cols = matrix[0].length;
+        int row = 0, col = cols - 1;
+        while (row < rows && col >= 0) {
+            int t = matrix[row][col];
+            if (t == target) {
+                return true;
+            } else if (t > target) {
+                col--;
+            } else {
+                row++;
+            }
+        }
+        return false;
+    }
 }
+
