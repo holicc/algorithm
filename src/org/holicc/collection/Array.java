@@ -523,7 +523,6 @@ public class Array {
     }
 
 
-
     /**
      * 二维数组中的查找
      * 时间复杂度 O(n^2)
@@ -563,6 +562,25 @@ public class Array {
             }
         }
         return false;
+    }
+
+    /**
+     * 数组中数字出现的次数 II
+     * 时间复杂度 O (n)
+     * 空间复杂度 O (n)
+     * <p>
+     * https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-ii-lcof/
+     */
+    public int singleNumber(int[] nums) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int num : nums) {
+            map.put(num, map.getOrDefault(num, 0) + 1);
+        }
+        //
+        for (Integer integer : map.keySet()) {
+            if (map.get(integer) == 1) return integer;
+        }
+        return -1;
     }
 }
 
