@@ -60,7 +60,7 @@ public class BitRelated {
     /**
      * 数组中数字出现的次数
      * 时间复杂度 O(n)
-     * 空间复杂度 O(n)
+     * 空间复杂度 O(1)
      * <p>
      * https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-lcof/
      */
