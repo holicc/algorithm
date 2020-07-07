@@ -1,11 +1,9 @@
 package org.holicc.collection;
 
 import org.holicc.model.ListNode;
+import org.holicc.model.Node;
 
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class LinkList {
 
@@ -182,5 +180,32 @@ public class LinkList {
             builder.append(builder.charAt(i));
         }
         return builder.delete(0, n).toString();
+    }
+
+
+    /**
+     * 复杂链表的复制
+     * 时间复杂度 O(n)
+     * 空间复杂度 O(n)
+     * <p>
+     * https://leetcode-cn.com/problems/fu-za-lian-biao-de-fu-zhi-lcof/
+     */
+    public Node copyRandomList(Node head) {
+        Map<Node, Node> map = new HashMap<>();
+        Node t = head;
+        //
+        while (t != null) {
+            map.put(t, new Node(t.val));
+            t = t.next;
+        }
+        //
+        t = head;
+        while (t != null) {
+            Node node = map.get(t);
+            node.next = map.get(t.next);
+            node.random = map.get(t.random);
+            t = t.next;
+        }
+        return map.get(head);
     }
 }

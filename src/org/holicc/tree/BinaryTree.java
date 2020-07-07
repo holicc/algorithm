@@ -156,4 +156,35 @@ public class BinaryTree {
         return isSymmetric(left.left, right.right)
                 && isSymmetric(left.right, right.left);
     }
+
+    /**
+     * 重建二叉树
+     * <p>
+     * https://leetcode-cn.com/problems/zhong-jian-er-cha-shu-lcof/
+     */
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        if (preorder == null || inorder == null) return null;
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < preorder.length; i++) {
+            map.put(inorder[i], i);
+        }
+        return buildTree(preorder, 0, preorder.length - 1,
+                0, inorder.length - 1, map);
+    }
+
+    private TreeNode buildTree(int[] preorder, int preorderStart, int preorderEnd, int inorderStart, int inorderEnd, Map<Integer, Integer> indexMap) {
+        if (preorderStart > preorderEnd) return null;
+        int rootVal = preorder[preorderStart];
+        TreeNode root = new TreeNode(rootVal);
+        if (preorderStart != preorderEnd) {
+            Integer rootIndex = indexMap.get(rootVal);
+            int leftNodes = rootIndex - inorderStart;
+            int rightNodes = inorderEnd - rootIndex;
+            TreeNode leftSubtree = buildTree(preorder, preorderStart + 1, preorderStart + leftNodes, inorderStart, rootIndex - 1, indexMap);
+            TreeNode rightSubtree = buildTree(preorder, preorderEnd - rightNodes + 1, preorderEnd, rootIndex + 1, inorderEnd, indexMap);
+            root.left = leftSubtree;
+            root.right = rightSubtree;
+        }
+        return root;
+    }
 }
