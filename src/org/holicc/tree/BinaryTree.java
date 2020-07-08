@@ -187,4 +187,24 @@ public class BinaryTree {
         }
         return root;
     }
+
+    /**
+     * 从上到下打印二叉树
+     * <p>
+     * https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-lcof/
+     */
+    public int[] levelOrder_01(TreeNode root) {
+        if (root == null) return new int[0];
+        List<Integer> r = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            TreeNode poll = queue.poll();
+            if (poll.left != null) queue.add(poll.left);
+            if (poll.right != null) queue.add(poll.right);
+            r.add(poll.val);
+        }
+        //
+        return r.stream().mapToInt(i -> i).toArray();
+    }
 }

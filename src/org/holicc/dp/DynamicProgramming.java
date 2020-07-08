@@ -2,6 +2,17 @@ package org.holicc.dp;
 
 public class DynamicProgramming {
 
+
+    public static void main(String[] args) {
+        DynamicProgramming programming = new DynamicProgramming();
+
+        programming.maxValue(new int[][]{
+                {1, 3, 1},
+                {1, 5, 1},
+                {4, 2, 1},
+        });
+    }
+
     /**
      * n个骰子的点数
      * <p>
@@ -61,5 +72,30 @@ public class DynamicProgramming {
             b = sum;
         }
         return sum;
+    }
+
+    /**
+     * 礼物的最大价值
+     * 时间复杂度 O(nm)
+     * 空间复杂度 O(1)
+     * <p>
+     * https://leetcode-cn.com/problems/li-wu-de-zui-da-jie-zhi-lcof/
+     */
+    public int maxValue(int[][] grid) {
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                if (i - 1 >= 0 && j - 1 >= 0) {
+                    grid[i][j] += Math.max(
+                            grid[i - 1][j],
+                            grid[i][j - 1]
+                    );
+                } else if (i - 1 >= 0) {
+                    grid[i][j] += grid[i - 1][j];
+                } else if (j - 1 >= 0) {
+                    grid[i][j] += grid[i][j - 1];
+                }
+            }
+        }
+        return grid[grid.length - 1][grid[0].length - 1];
     }
 }
