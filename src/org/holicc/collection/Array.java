@@ -582,5 +582,25 @@ public class Array {
         }
         return -1;
     }
+
+    /**
+     * 股票的最大利润
+     * 时间复杂度 O(n^2)
+     * 空间复杂度 O(1)
+     * <p>
+     * https://leetcode-cn.com/problems/gu-piao-de-zui-da-li-run-lcof/
+     */
+    public int maxProfit(int[] prices) {
+        if (prices.length <= 0) return 0;
+        int profile = 0;
+        for (int i = 0; i < prices.length; i++) {
+            for (int j = i + 1; j < prices.length; j++) {
+                profile = Math.max(profile, prices[j] - prices[i]);
+            }
+        }
+        return profile;
+    }
+
+
 }
 

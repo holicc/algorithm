@@ -98,4 +98,41 @@ public class DynamicProgramming {
         }
         return grid[grid.length - 1][grid[0].length - 1];
     }
+
+    /**
+     * 丑数
+     * 时间复杂度 O(n)
+     * 空间复杂度 O(n)
+     * <p>
+     * https://leetcode-cn.com/problems/chou-shu-lcof/
+     */
+    public int nthUglyNumber(int n) {
+        int a = 0, b = 0, c = 0;
+        int[] dp = new int[n];
+        dp[0] = 1;
+        for (int i = 1; i < n; i++) {
+            int n2 = dp[a] * 2, n3 = dp[b] * 3, n5 = dp[c] * 5;
+            dp[i] = Math.min(Math.min(n2, n3), n5);
+            if (dp[i] == n2) a++;
+            if (dp[i] == n3) b++;
+            if (dp[i] == n5) c++;
+        }
+        return dp[n - 1];
+    }
+
+    /**
+     * 股票的最大利润
+     * 时间复杂度 O(n)
+     * 空间复杂度 O(1)
+     * <p>
+     * https://leetcode-cn.com/problems/gu-piao-de-zui-da-li-run-lcof/
+     */
+    public int maxProfit_01(int[] prices) {
+        int cost = Integer.MAX_VALUE, profit = 0;
+        for (int price : prices) {
+            cost = Math.min(cost, price);
+            profit = Math.max(profit, price - cost);
+        }
+        return profit;
+    }
 }
