@@ -1,8 +1,10 @@
 package org.holicc.tree;
 
+import org.holicc.model.Node;
 import org.holicc.model.TreeNode;
 
 import java.util.*;
+
 
 public class BinaryTree {
 
@@ -190,6 +192,7 @@ public class BinaryTree {
 
     /**
      * 从上到下打印二叉树
+     * BFS
      * <p>
      * https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-lcof/
      */
@@ -206,5 +209,28 @@ public class BinaryTree {
         }
         //
         return r.stream().mapToInt(i -> i).toArray();
+    }
+
+    /**
+     * 二叉搜索树与双向链表
+     * <p>
+     * https://leetcode-cn.com/problems/er-cha-sou-suo-shu-yu-shuang-xiang-lian-biao-lcof/
+     */
+    TreeNode pre, head;
+    public TreeNode treeToDoublyList(TreeNode root) {
+        if(root == null) return null;
+        dfs(root);
+        head.left = pre;
+        pre.right = head;
+        return head;
+    }
+    void dfs(TreeNode cur) {
+        if(cur == null) return;
+        dfs(cur.left);
+        if(pre != null) pre.right = cur;
+        else head = cur;
+        cur.left = pre;
+        pre = cur;
+        dfs(cur.right);
     }
 }
