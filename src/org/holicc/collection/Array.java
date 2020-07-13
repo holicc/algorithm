@@ -601,6 +601,25 @@ public class Array {
         return profile;
     }
 
-
+    /**
+     * 栈的压入、弹出序列
+     * <p>
+     * https://leetcode-cn.com/problems/zhan-de-ya-ru-dan-chu-xu-lie-lcof/
+     */
+    public boolean validateStackSequences(int[] pushed, int[] popped) {
+        int[] stack=new int[popped.length+1];
+        int k=0,m=0;
+        for (int value : pushed) {
+            stack[++k] = value;
+            while (stack[k] == popped[m]) {
+                //System.out.println(stack[k]+" "+popped[m]);
+                k--;
+                m++;
+                if (k == 0)
+                    break;
+            }
+        }
+        return k == 0;
+    }
 }
 
