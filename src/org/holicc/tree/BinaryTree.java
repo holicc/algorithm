@@ -1,6 +1,5 @@
 package org.holicc.tree;
 
-import org.holicc.model.Node;
 import org.holicc.model.TreeNode;
 
 import java.util.*;
@@ -217,20 +216,44 @@ public class BinaryTree {
      * https://leetcode-cn.com/problems/er-cha-sou-suo-shu-yu-shuang-xiang-lian-biao-lcof/
      */
     TreeNode pre, head;
+
     public TreeNode treeToDoublyList(TreeNode root) {
-        if(root == null) return null;
+        if (root == null) return null;
         dfs(root);
         head.left = pre;
         pre.right = head;
         return head;
     }
+
     void dfs(TreeNode cur) {
-        if(cur == null) return;
+        if (cur == null) return;
         dfs(cur.left);
-        if(pre != null) pre.right = cur;
+        if (pre != null) pre.right = cur;
         else head = cur;
         cur.left = pre;
         pre = cur;
         dfs(cur.right);
+    }
+
+    /**
+     * 二叉树中和为某一值的路径
+     * <p>
+     * https://leetcode-cn.com/problems/er-cha-shu-zhong-he-wei-mou-yi-zhi-de-lu-jing-lcof/
+     */
+    LinkedList<List<Integer>> res = new LinkedList<>();
+    LinkedList<Integer> path = new LinkedList<>();
+    public List<List<Integer>> pathSum(TreeNode root, int sum) {
+        recur(root, sum);
+        return res;
+    }
+    void recur(TreeNode root, int tar) {
+        if(root == null) return;
+        path.add(root.val);
+        tar -= root.val;
+        if(tar == 0 && root.left == null && root.right == null)
+            res.add(new LinkedList(path));
+        recur(root.left, tar);
+        recur(root.right, tar);
+        path.removeLast();
     }
 }

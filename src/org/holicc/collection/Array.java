@@ -612,7 +612,6 @@ public class Array {
         for (int value : pushed) {
             stack[++k] = value;
             while (stack[k] == popped[m]) {
-                //System.out.println(stack[k]+" "+popped[m]);
                 k--;
                 m++;
                 if (k == 0)
