@@ -1,12 +1,15 @@
 package org.holicc.string;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class Str {
 
     public static void main(String[] args) {
         Str str = new Str();
-        System.out.println(str.reverseWords("a good   example"));
+        str.minNumber(new int[]{10, 2});
     }
 
     /**
@@ -54,6 +57,20 @@ public class Str {
         return res.toString().trim(); // 转化为字符串，删除尾部空格，并返回
     }
 
-
+    /**
+     * 把数组排成最小的数
+     * <p>
+     * https://leetcode-cn.com/problems/ba-shu-zu-pai-cheng-zui-xiao-de-shu-lcof/
+     */
+    public String minNumber(int[] nums) {
+        String[] strs = new String[nums.length];
+        for(int i = 0; i < nums.length; i++)
+            strs[i] = String.valueOf(nums[i]);
+        Arrays.sort(strs, (x, y) -> (x + y).compareTo(y + x));
+        StringBuilder res = new StringBuilder();
+        for(String s : strs)
+            res.append(s);
+        return res.toString();
+    }
 
 }
