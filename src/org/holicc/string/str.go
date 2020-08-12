@@ -1,5 +1,11 @@
 package main
 
+import "strconv"
+
+func main() {
+	translateNum(25)
+}
+
 //字符串的排列
 //时间复杂度 O(n!)
 //https://leetcode-cn.com/problems/zi-fu-chuan-de-pai-lie-lcof/submissions/
@@ -11,7 +17,6 @@ func permutation(s string) []string {
 	check(ss, sortS(s), &ret, mark)
 	return ret
 }
-
 func check(ss string, s string, ret *[]string, mark []int) {
 	if len(ss) == len(s) {
 		*ret = append(*ret, ss)
@@ -31,7 +36,6 @@ func check(ss string, s string, ret *[]string, mark []int) {
 	}
 
 }
-
 func sortS(s string) string {
 	b := []byte(s)
 	blen := len(b)
