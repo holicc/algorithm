@@ -1,11 +1,5 @@
 package main
 
-import "strconv"
-
-func main() {
-	translateNum(25)
-}
-
 //字符串的排列
 //时间复杂度 O(n!)
 //https://leetcode-cn.com/problems/zi-fu-chuan-de-pai-lie-lcof/submissions/
