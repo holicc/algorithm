@@ -1,12 +1,21 @@
 package main
 
 import (
-	"fmt"
 	"math"
 )
 
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
+}
+
 func main() {
-	fmt.Println(st([]int{4, 8, 6, 12, 16, 14, 10}))
+	isSubStructure(&TreeNode{
+		Val: 1,
+	}, &TreeNode{
+		Val: 1,
+	})
 }
 
 //二叉搜索树的后序遍历序列
@@ -58,4 +67,18 @@ func st(postorder []int) bool {
 		l++
 	}
 	return true
+}
+
+func isSubStructure(A *TreeNode, B *TreeNode) bool {
+	return (A != nil && B != nil) && (r(A, B) || isSubStructure(A.Left, B) || isSubStructure(A.Right, B))
+}
+
+func r(a *TreeNode, b *TreeNode) bool {
+	if b == nil {
+		return true
+	}
+	if a == nil || a.Val != b.Val {
+		return false
+	}
+	return r(a.Left, b.Left) && r(a.Right, b.Right)
 }
