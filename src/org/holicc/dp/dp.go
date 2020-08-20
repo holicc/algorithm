@@ -22,3 +22,29 @@ func translateNum(num int) int {
 	}
 	return r
 }
+
+//最长不含重复字符的子字符串
+//https://leetcode-cn.com/problems/zui-chang-bu-han-zhong-fu-zi-fu-de-zi-zi-fu-chuan-lcof/
+//时间复杂度 O(N) 其中 NN 为字符串长度，动态规划需遍历计算 dpdp 列表。
+//空间复杂度 O(1) 字符的 ASCII 码范围为 00 ~ 127127 ，哈希表 dicdic 最多使用 O(128) = O(1)O(128)=O(1) 大小的额外空间。
+func lengthOfLongestSubstring(s string) int {
+	table := make(map[rune]int, 128)
+	res, tmp := 0, 0
+	for j, c := range s {
+		i := -1
+		if v, ok := table[c]; ok {
+			i = v
+		}
+		table[c] = j
+		//
+		if tmp < j-i {
+			tmp = tmp + 1
+		} else {
+			tmp = j - i
+		}
+		if tmp > res {
+			res = tmp
+		}
+	}
+	return res
+}
