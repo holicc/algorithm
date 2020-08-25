@@ -26,3 +26,27 @@ func countDigitOne(n int) int {
 	}
 	return ans
 }
+
+//数值的整数次方
+//https://leetcode-cn.com/problems/shu-zhi-de-zheng-shu-ci-fang-lcof/
+//时间复杂度 O(log2n)
+func myPow(x float64, n int) float64 {
+	if x == 0 {
+		return 0
+	}
+	//
+	if n < 0 {
+		x = 1 / x
+		n = -n
+	}
+	//
+	r := 1.0
+	for n > 0 {
+		if (n & 1) == 1 {
+			r *= x
+		}
+		x *= x
+		n >>= 1
+	}
+	return r
+}
