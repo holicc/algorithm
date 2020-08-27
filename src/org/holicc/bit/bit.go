@@ -2,10 +2,11 @@ package main
 
 import (
 	"math"
+	"strings"
 )
 
 func main() {
-	println(strToInt("-91283472332"))
+	println(strToInt("-2147483647"))
 }
 
 //1～n整数中1出现的次数
@@ -58,19 +59,14 @@ func myPow(x float64, n int) float64 {
 //把字符串转换成整数
 //https://leetcode-cn.com/problems/ba-zi-fu-chuan-zhuan-huan-cheng-zheng-shu-lcof/
 func strToInt(str string) int {
+	str = strings.TrimSpace(str)
 	if len(str) == 0 {
 		return 0
 	}
 	var sign = 1
 	var i int
-	// 跳过字符头部数值
-	for i < len(str) && str[i] == ' ' {
-		i++
-	}
-	// 如果都是空格，则返回0
-	if i == len(str) {
-		return 0
-	}
+	var boundary = math.MaxInt32 / 10
+	var res int
 	// 如果是符号位则i++
 	if str[i] == '-' || str[i] == '+' {
 		if str[i] == '-' {
@@ -78,7 +74,6 @@ func strToInt(str string) int {
 		}
 		i++
 	}
-	var res int
 	// 开始处理数值
 	for ; i < len(str); i++ {
 		// 不符合规则则跳过
@@ -86,14 +81,15 @@ func strToInt(str string) int {
 			break
 		}
 		// 处理越界的情况
-		res = res*10 + int(str[i]-'0')
-		if res > math.MaxInt32 {
+		if res > boundary || (res == boundary && str[i] > '7') {
 			if sign == 1 {
 				return math.MaxInt32
 			} else {
 				return math.MinInt32
 			}
 		}
+		res = res*10 + int(str[i]-'0')
+
 	}
 	return sign * res
 }
