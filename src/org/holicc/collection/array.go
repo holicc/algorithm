@@ -22,3 +22,12 @@ func findNthDigit(n int) int {
 	var res = strconv.Itoa(num)[(n-1)%digit] - '0'
 	return int(res)
 }
+
+//https://leetcode-cn.com/problems/running-sum-of-1d-array/
+//一维数组的动态和
+func runningSum(nums []int) []int {
+	for i := 1; i < len(nums); i++ {
+		nums[i] += nums[i-1]
+	}
+	return nums
+}
