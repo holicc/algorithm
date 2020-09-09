@@ -1,9 +1,12 @@
 package main
 
-import "strconv"
+import (
+	"math"
+	"strconv"
+)
 
 func main() {
-
+	kidsWithCandies([]int{2, 3, 1, 5, 3}, 3)
 }
 
 //数字序列中某一位的数字
@@ -30,4 +33,21 @@ func runningSum(nums []int) []int {
 		nums[i] += nums[i-1]
 	}
 	return nums
+}
+
+//https://leetcode-cn.com/problems/kids-with-the-greatest-number-of-candies/
+//拥有最多糖果的孩子
+func kidsWithCandies(candies []int, extraCandies int) []bool {
+	max := math.MinInt32
+	for i := range candies {
+		if max < candies[i] {
+			max = candies[i]
+		}
+	}
+	//
+	r := make([]bool, len(candies))
+	for i := range r {
+		r[i] = (candies[i] + extraCandies) >= max
+	}
+	return r
 }
