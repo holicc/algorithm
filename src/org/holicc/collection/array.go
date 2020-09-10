@@ -51,3 +51,17 @@ func kidsWithCandies(candies []int, extraCandies int) []bool {
 	}
 	return r
 }
+
+//https://leetcode-cn.com/problems/number-of-good-pairs/
+//好数对的数目
+func numIdenticalPairs(nums []int) int {
+	var r int
+	for i := 0; i < len(nums); i++ {
+		for j := i + 1; j < len(nums); j++ {
+			if nums[i] == nums[j] {
+				r++
+			}
+		}
+	}
+	return r
+}
