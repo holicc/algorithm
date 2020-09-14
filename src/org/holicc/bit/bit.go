@@ -93,3 +93,13 @@ func strToInt(str string) int {
 	}
 	return sign * res
 }
+
+//https://leetcode-cn.com/problems/xor-operation-in-an-array/
+//数组异或操作
+func xorOperation(n int, start int) int {
+	var result int
+	for i := 0; i < n; i++ {
+		result ^= start + 2*i
+	}
+	return result
+}
