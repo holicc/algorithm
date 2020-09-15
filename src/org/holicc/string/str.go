@@ -148,3 +148,18 @@ func isNumber(s string) bool {
 	}
 	return state == STATE_INTEGER || state == STATE_POINT || state == STATE_FRACTION || state == STATE_EXP_NUMBER || state == STATE_END
 }
+
+//https://leetcode-cn.com/problems/nGK0Fy/
+//速算机器人
+func calculate(s string) int {
+	var x, y = 1, 0
+	for i := 0; i < len(s); i++ {
+		if string(s[i]) == "A" {
+			x = 2*x + y
+		}
+		if string(s[i]) == "B" {
+			y = 2*y + x
+		}
+	}
+	return x + y
+}
