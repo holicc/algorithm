@@ -83,3 +83,15 @@ func shuffle(nums []int, n int) []int {
 	}
 	return r
 }
+
+//https://leetcode-cn.com/problems/guess-numbers/submissions/
+//猜数字
+func game(guess []int, answer []int) int {
+	r := 0
+	for i := range answer {
+		if guess[i] == answer[i] {
+			r++
+		}
+	}
+	return r
+}
