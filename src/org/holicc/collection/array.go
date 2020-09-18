@@ -105,3 +105,17 @@ func minCount(coins []int) int {
 	}
 	return r
 }
+
+// https://leetcode-cn.com/problems/matrix-diagonal-sum/
+// 矩阵对角线元素的和
+func diagonalSum(mat [][]int) int {
+	var result int
+	for i, val := range mat {
+		if i == len(mat)-i-1 {
+			result += val[i]
+		} else {
+			result += val[i] + val[len(mat)-i-1]
+		}
+	}
+	return result
+}
