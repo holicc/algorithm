@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	shuffle([]int{2, 5, 1, 3, 4, 7}, 3)
+	println(sumOddLengthSubarrays([]int{1, 2}))
 }
 
 //数字序列中某一位的数字
@@ -118,4 +118,18 @@ func diagonalSum(mat [][]int) int {
 		}
 	}
 	return result
+}
+
+// https://leetcode-cn.com/problems/sum-of-all-odd-length-subarrays/
+// 所有奇数长度子数组的和
+func sumOddLengthSubarrays(arr []int) int {
+	var r int
+	for i := 0; i < len(arr); i++ {
+		for j := i; j < len(arr); j += 2 {
+			for k := i; k <= j; k++ {
+				r += arr[k]
+			}
+		}
+	}
+	return r
 }
