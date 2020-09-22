@@ -1,12 +1,13 @@
 package main
 
 import (
+	"fmt"
 	"math"
 	"strconv"
 )
 
 func main() {
-	println(sumOddLengthSubarrays([]int{1, 2}))
+	fmt.Println(createTargetArray([]int{0, 1, 2, 3, 4}, []int{0, 1, 2, 2, 1}))
 }
 
 //数字序列中某一位的数字
@@ -132,4 +133,15 @@ func sumOddLengthSubarrays(arr []int) int {
 		}
 	}
 	return r
+}
+
+// https://leetcode-cn.com/problems/create-target-array-in-the-given-order/
+// 按既定顺序创建目标数组
+func createTargetArray(nums []int, index []int) []int {
+	var res = make([]int, len(nums))
+	for k, i := range index {
+		copy(res[i+1:], res[i:])
+		res[i] = nums[k]
+	}
+	return res
 }
