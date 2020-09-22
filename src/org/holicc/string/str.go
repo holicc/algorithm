@@ -163,3 +163,17 @@ func calculate(s string) int {
 	}
 	return x + y
 }
+
+// https://leetcode-cn.com/problems/subtract-the-product-and-sum-of-digits-of-an-integer/
+// 整数的各位积和之差
+func subtractProductAndSum(n int) int {
+	m := 1
+	s := 0
+	for n > 0 {
+		i := n % 10
+		m *= i
+		s += i
+		n /= 10
+	}
+	return m - s
+}
