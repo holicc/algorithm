@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	fmt.Println(createTargetArray([]int{0, 1, 2, 3, 4}, []int{0, 1, 2, 2, 1}))
+	fmt.Println(decompressRLElist([]int{1, 2, 3, 4}))
 }
 
 //数字序列中某一位的数字
@@ -144,4 +144,18 @@ func createTargetArray(nums []int, index []int) []int {
 		res[i] = nums[k]
 	}
 	return res
+}
+
+// https://leetcode-cn.com/problems/decompress-run-length-encoded-list/
+// 解压缩编码列表
+func decompressRLElist(nums []int) []int {
+	r := make([]int, 0)
+	for i := 1; i < len(nums); i += 2 {
+		t := make([]int, 0)
+		for j := 0; j < nums[i-1]; j++ {
+			t = append(t, nums[i])
+		}
+		r = append(r, t...)
+	}
+	return r
 }
