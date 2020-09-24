@@ -159,3 +159,35 @@ func decompressRLElist(nums []int) []int {
 	}
 	return r
 }
+
+// https://leetcode-cn.com/problems/number-of-steps-to-reduce-a-number-to-zero/
+// 将数字变成 0 的操作次数
+func numberOfSteps(num int) int {
+	var r int
+	for num > 0 {
+		if (num & 1) == 1 {
+			num -= 1
+		} else {
+			num /= 2
+		}
+		r++
+	}
+	return r
+}
+
+// https://leetcode-cn.com/problems/how-many-numbers-are-smaller-than-the-current-number/
+// 有多少小于当前数字的数字
+func smallerNumbersThanCurrent(nums []int) []int {
+	r := make([]int, len(nums))
+	for i := 0; i < len(nums); i++ {
+		t := nums[i]
+		var c int
+		for j := 0; j < len(nums); j++ {
+			if nums[j] < t {
+				c++
+			}
+		}
+		r[i] = c
+	}
+	return r
+}
