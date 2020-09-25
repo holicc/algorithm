@@ -191,3 +191,16 @@ func smallerNumbersThanCurrent(nums []int) []int {
 	}
 	return r
 }
+
+// https://leetcode-cn.com/problems/find-numbers-with-even-number-of-digits/
+// 统计位数为偶数的数字
+func findNumbers(nums []int) int {
+	var r int
+	for i := range nums {
+		itoa := strconv.Itoa(nums[i])
+		if (len(itoa) & 1) == 0 {
+			r++
+		}
+	}
+	return r
+}
