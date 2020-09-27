@@ -177,3 +177,44 @@ func subtractProductAndSum(n int) int {
 	}
 	return m - s
 }
+
+// https://leetcode-cn.com/problems/split-a-string-in-balanced-strings/
+// 分割平衡字符串
+func balancedStringSplit(s string) int {
+	var (
+		r int
+		c int
+	)
+	for i := 0; i < len(s); i++ {
+		if s[i] == 'R' {
+			c++
+		} else {
+			c--
+		}
+		if c == 0 {
+			r++
+		}
+	}
+	return r
+}
+
+// https://leetcode-cn.com/problems/destination-city/
+// 旅行终点站
+func destCity(paths [][]string) string {
+	m := make(map[string]string)
+	for i := range paths {
+		path := paths[i]
+		m[path[0]] = path[1]
+	}
+	//
+	for i := range paths {
+		path := paths[i]
+		if _, ok := m[path[0]]; !ok {
+			return path[0]
+		}
+		if _, ok := m[path[1]]; !ok {
+			return path[1]
+		}
+	}
+	return ""
+}

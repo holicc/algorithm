@@ -3,11 +3,12 @@ package main
 import (
 	"fmt"
 	"math"
+	"sort"
 	"strconv"
 )
 
 func main() {
-	fmt.Println(decompressRLElist([]int{1, 2, 3, 4}))
+	fmt.Println(restoreString("aiohn", []int{3, 1, 4, 2, 0}))
 }
 
 //数字序列中某一位的数字
@@ -221,4 +222,59 @@ func minTimeToVisitAllPoints(points [][]int) int {
 		}
 	}
 	return r
+}
+
+// https://leetcode-cn.com/problems/number-of-students-doing-homework-at-a-given-time/
+// 在既定时间做作业的学生人数
+func busyStudent(startTime []int, endTime []int, queryTime int) int {
+	var r int
+	for i := range startTime {
+		if startTime[i] <= queryTime && endTime[i] >= queryTime {
+			r++
+		}
+	}
+	return r
+}
+
+// https://leetcode-cn.com/problems/shuffle-string/
+// 重新排列字符串
+func restoreString(s string, indices []int) string {
+	res := make([]byte, len(s))
+	for i := range s {
+		res[indices[i]] = s[i]
+	}
+	return string(res)
+}
+
+// https://leetcode-cn.com/problems/count-good-triplets/
+// 统计好三元组
+func countGoodTriplets(arr []int, a int, b int, c int) int {
+	var r int
+	for i := 0; i < len(arr); i++ {
+		for j := i + 1; j < len(arr); j++ {
+			for k := j + 1; k < len(arr); k++ {
+				if Abs(arr[i]-arr[j]) <= a &&
+					Abs(arr[j]-arr[k]) <= b &&
+					Abs(arr[i]-arr[k]) <= c {
+					r++
+				}
+			}
+		}
+	}
+	return r
+}
+
+func Abs(i int) int {
+	if i < 0 {
+		return -i
+	} else {
+		return i
+	}
+}
+
+// https://leetcode-cn.com/problems/maximum-product-of-two-elements-in-an-array/
+// 数组中两元素的最大乘积
+func maxProduct(nums []int) int {
+	sort.Ints(nums)
+	return (nums[len(nums)-1] - 1) * (nums[len(nums)-2] - 1)
 }

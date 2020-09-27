@@ -103,3 +103,19 @@ func xorOperation(n int, start int) int {
 	}
 	return result
 }
+
+type ListNode struct {
+	Val  int
+	Next *ListNode
+}
+
+// https://leetcode-cn.com/submissions/detail/111818144/
+// 二进制链表转整数
+func getDecimalValue(head *ListNode) int {
+	result := 0
+	for head != nil {
+		result = (result << 1) | (head.Val)
+		head = head.Next
+	}
+	return result
+}
