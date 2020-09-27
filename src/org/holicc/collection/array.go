@@ -204,3 +204,21 @@ func findNumbers(nums []int) int {
 	}
 	return r
 }
+
+// https://leetcode-cn.com/problems/minimum-time-visiting-all-points/
+// 访问所有点的最小时间
+func minTimeToVisitAllPoints(points [][]int) int {
+	var r int
+	for i := 1; i < len(points); i++ {
+		pre := points[i-1]
+		cur := points[i]
+		x := int(math.Abs(float64(cur[0] - pre[0])))
+		y := int(math.Abs(float64(cur[1] - pre[1])))
+		if x > y {
+			r += x
+		} else {
+			r += y
+		}
+	}
+	return r
+}
