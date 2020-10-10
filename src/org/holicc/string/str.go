@@ -1,5 +1,9 @@
 package main
 
+import (
+	"strconv"
+)
+
 //字符串的排列
 //时间复杂度 O(n!)
 //https://leetcode-cn.com/problems/zi-fu-chuan-de-pai-lie-lcof/submissions/
@@ -217,4 +221,38 @@ func destCity(paths [][]string) string {
 		}
 	}
 	return ""
+}
+
+// https://leetcode-cn.com/problems/maximum-69-number/
+// 组成的最大数字
+func maximum69Number(num int) int {
+	bytes := []byte(strconv.Itoa(num))
+	for i := range bytes {
+		if bytes[i] == '6' {
+			bytes[i] = '9'
+			break
+		}
+	}
+	r, _ := strconv.Atoi(string(bytes))
+	return r
+}
+
+// https://leetcode-cn.com/problems/decrypt-string-from-alphabet-to-integer-mapping/
+// 解码字母到整数映射
+func freqAlphabets(s string) string {
+	n, ans := len(s), []rune{}
+	for i := 0; i < n; i++ {
+		if i+2 < n && s[i+2] == '#' {
+			ans = append(ans, get(s[i:i+2]))
+			i += 2
+		} else {
+			ans = append(ans, get(s[i:i+1]))
+		}
+	}
+	return string(ans)
+}
+
+func get(s string) rune {
+	r, _ := strconv.Atoi(s)
+	return rune(r + 96)
 }

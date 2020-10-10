@@ -278,3 +278,72 @@ func maxProduct(nums []int) int {
 	sort.Ints(nums)
 	return (nums[len(nums)-1] - 1) * (nums[len(nums)-2] - 1)
 }
+
+// https://leetcode-cn.com/problems/replace-elements-with-greatest-element-on-right-side/
+// 将每个元素替换为右侧最大元素
+func replaceElements(arr []int) []int {
+	m := -1
+	for i := len(arr) - 1; i > 0; i-- {
+		if m < arr[i] {
+			arr[i], m = m, arr[i]
+		} else {
+			arr[i] = m
+		}
+	}
+	return arr
+}
+
+// https://leetcode-cn.com/problems/count-negative-numbers-in-a-sorted-matrix/
+// 统计有序矩阵中的负数
+func countNegatives(grid [][]int) int {
+	var r int
+	for i := range grid {
+		for j := range grid[i] {
+			if grid[i][j] < 0 {
+				r++
+			}
+		}
+	}
+	return r
+}
+
+// https://leetcode-cn.com/problems/cells-with-odd-values-in-a-matrix/
+// 奇数值单元格的数目
+func oddCells(n int, m int, indices [][]int) int {
+
+	var r int
+	rows := make([]int, n)
+	cols := make([]int, m)
+	for i := range indices {
+		arr := indices[i]
+		row, col := arr[0], arr[1]
+		rows[row]++
+		cols[col]++
+	}
+	var rowNum int
+	for _, v := range rows {
+		if (v & 1) == 1 {
+			r += m
+			rowNum++
+		}
+	}
+	for _, v := range cols {
+		if (v & 1) == 1 {
+			r += n - 2*rowNum
+		}
+	}
+	return r
+}
+
+// https://leetcode-cn.com/problems/make-two-arrays-equal-by-reversing-sub-arrays/
+// 通过翻转子数组使两个数组相等
+func canBeEqual(target []int, arr []int) bool {
+	sort.Ints(arr)
+	sort.Ints(target)
+	for i := range target {
+		if target[i] != arr[i] {
+			return false
+		}
+	}
+	return true
+}
