@@ -2,6 +2,7 @@ package main
 
 import (
 	"strconv"
+	"strings"
 )
 
 //字符串的排列
@@ -255,4 +256,33 @@ func freqAlphabets(s string) string {
 func get(s string) rune {
 	r, _ := strconv.Atoi(s)
 	return rune(r + 96)
+}
+
+// https://leetcode-cn.com/problems/increasing-decreasing-string/
+// 上升下降字符串
+func sortString(s string) string {
+	var table [26]byte
+	var r strings.Builder
+	for _, v := range s {
+		table[v-'a'] += 1
+	}
+	//
+	len_ := len(s)
+	for len_ > 0 {
+		for i := 0; i < 26; i++ {
+			if table[i] > 0 {
+				r.WriteByte('a' + byte(i))
+				table[i]--
+				len_--
+			}
+		}
+		for i := 25; i >= 0; i-- {
+			if table[i] > 0 {
+				r.WriteByte('a' + byte(i))
+				table[i]--
+				len_--
+			}
+		}
+	}
+	return r.String()
 }
