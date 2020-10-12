@@ -347,3 +347,31 @@ func canBeEqual(target []int, arr []int) bool {
 	}
 	return true
 }
+
+// https://leetcode-cn.com/problems/find-n-unique-integers-sum-up-to-zero/
+// 和为零的N个唯一整数
+func sumZero(n int) []int {
+	var s int
+	t := n
+	r := make([]int, 0, n)
+	for t > 1 {
+		r = append(r, -t)
+		s += -t
+		t--
+	}
+	r = append(r, -s)
+	return r
+}
+
+// https://leetcode-cn.com/problems/can-make-arithmetic-progression-from-sequence/
+// 判断能否形成等差数列
+func canMakeArithmeticProgression(arr []int) bool {
+	sort.Ints(arr)
+	d := arr[1] - arr[0]
+	for i := 2; i < len(arr); i++ {
+		if arr[i]-arr[i-1] != d {
+			return false
+		}
+	}
+	return true
+}

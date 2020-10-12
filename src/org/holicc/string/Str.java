@@ -73,4 +73,24 @@ public class Str {
         return res.toString();
     }
 
+     public  String reverseWords(String s) {
+            List<String> list = Arrays.stream(s.split(" "))
+                    .map(w -> {
+                        char[] chars = w.toCharArray();
+                        for (int i = 0, j = chars.length - 1; i < j; i++, j--) {
+                            char t = chars[i];
+                            chars[i] = chars[j];
+                            chars[j] = t;
+                        }
+                        return new String(chars);
+                    })
+                    .collect(Collectors.toList());
+            StringBuilder builder = new StringBuilder();
+            for (String c : list) {
+                builder.append(c).append(" ");
+            }
+            builder.deleteCharAt(builder.length()-1);
+            return builder.toString();
+     }
+
 }
