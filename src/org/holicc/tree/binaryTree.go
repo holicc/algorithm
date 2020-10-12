@@ -82,3 +82,29 @@ func r(a *TreeNode, b *TreeNode) bool {
 	}
 	return r(a.Left, b.Left) && r(a.Right, b.Right)
 }
+
+func increasingBST(root *TreeNode) *TreeNode {
+	var nums = make([]int, 0)
+	dfs(root, &nums)
+	r := &TreeNode{
+		Val: nums[0],
+	}
+	t := r
+	for _, v := range nums[1:] {
+		next := &TreeNode{
+			Val: v,
+		}
+		t.Right = next
+		t = t.Right
+	}
+	return r
+}
+
+func dfs(root *TreeNode, num *[]int) {
+	if root == nil {
+		return
+	}
+	dfs(root.Left, num)
+	*num = append(*num, root.Val)
+	dfs(root.Right, num)
+}
