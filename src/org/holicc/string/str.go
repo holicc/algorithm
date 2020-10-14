@@ -299,3 +299,37 @@ func findLUSlength(a string, b string) int {
 		return len(b)
 	}
 }
+
+// https://leetcode-cn.com/problems/find-words-that-can-be-formed-by-characters/
+// 拼写单词
+func countCharacters(words []string, chars string) int {
+	var r int
+	//
+	m := make([]int, 26)
+	for _, c := range chars {
+		m[c-'a']++
+	}
+	//
+	for _, w := range words {
+		match := true
+		t := make([]int, 26)
+		for _, c := range w {
+			t[c-'a']++
+		}
+		//
+		for _, c := range w {
+			if t[c-'a'] > m[c-'a'] {
+				match = false
+				break
+			}
+		}
+		if match {
+			r += len(w)
+		}
+	}
+	return r
+}
+
+func main() {
+	println(countCharacters([]string{"cat", "bt", "hat", "tree"}, "atach"))
+}
