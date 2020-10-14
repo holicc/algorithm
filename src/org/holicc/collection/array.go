@@ -375,3 +375,129 @@ func canMakeArithmeticProgression(arr []int) bool {
 	}
 	return true
 }
+
+// https://leetcode-cn.com/problems/lucky-numbers-in-a-matrix/
+// 矩阵中的幸运数
+func luckyNumbers(matrix [][]int) []int {
+	var r []int
+	for i := 0; i < len(matrix); i++ {
+		var c int
+		min := math.MaxInt32
+		for j := 0; j < len(matrix[i]); j++ {
+			if matrix[i][j] < min {
+				min = matrix[i][j]
+				c = j
+			}
+		}
+		max := math.MinInt32
+		for k := 0; k < len(matrix); k++ {
+			if max < matrix[k][c] {
+				max = matrix[k][c]
+			}
+		}
+		if max == min {
+			r = append(r, min)
+		}
+	}
+	return r
+}
+
+// https://leetcode-cn.com/problems/final-prices-with-a-special-discount-in-a-shop/
+// 商品折扣后的最终价格
+func finalPrices(prices []int) []int {
+	stack := make([]int, 0, len(prices))
+	for i := 0; i < len(prices); i++ {
+		for len(stack) > 0 && prices[i] <= prices[stack[len(stack)-1]] {
+			pop := stack[len(stack)-1]
+			stack = stack[:len(stack)-1]
+			prices[pop] -= prices[i]
+		}
+		stack = append(stack, i)
+	}
+	return prices
+}
+
+// https://leetcode-cn.com/problems/find-the-distance-value-between-two-arrays/
+// 两个数组间的距离值
+func findTheDistanceValue(arr1 []int, arr2 []int, d int) int {
+	var r int
+	for _, v := range arr1 {
+		match := true
+		for _, c := range arr2 {
+			if Abs(v-c) > d {
+				match = false
+				break
+			}
+		}
+		if match {
+			r++
+		}
+	}
+	return r
+}
+
+// https://leetcode-cn.com/problems/find-positive-integer-solution-for-a-given-equation/
+// 找出给定方程的正整数解
+func findSolution(customFunction func(int, int) int, z int) [][]int {
+	var res [][]int
+	for i := 1; i <= 1000; i++ {
+		low, high := 1, 1000
+		t1, t2 := customFunction(i, low), customFunction(i, high)
+		if z < t1 || z > t2 {
+			continue
+		}
+		for low <= high {
+			mid := low + (high-low)/2
+			t3 := customFunction(i, mid)
+			if z == t3 {
+				res = append(res, []int{i, mid})
+				break
+			} else if z > t3 {
+				low = mid + 1
+			} else {
+				high = mid - 1
+			}
+		}
+	}
+	return res
+}
+
+// https://leetcode-cn.com/problems/unique-number-of-occurrences/
+// 独一无二的出现次数
+func uniqueOccurrences(arr []int) bool {
+	m := make(map[int]int)
+	n := make(map[int]int)
+	for _, v := range arr {
+		m[v]++
+	}
+	for k, v := range m {
+		if _, ok := n[v]; ok {
+			return false
+		} else {
+			n[v] = k
+		}
+	}
+	return true
+}
+
+// https://leetcode-cn.com/problems/minimum-subsequence-in-non-increasing-order/
+// 非递增顺序的最小子序列
+func minSubsequence(nums []int) []int {
+	sort.Ints(nums)
+	//
+	sum := 0
+	for _, n := range nums {
+		sum += n
+	}
+	//
+	r := make([]int, 0)
+	t := 0
+	for i := len(nums) - 1; i >= 0; i-- {
+		t += nums[i]
+		r = append(r, nums[i])
+		if t > sum-t {
+			return r
+		}
+	}
+	return r
+}

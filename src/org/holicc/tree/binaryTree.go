@@ -108,3 +108,30 @@ func dfs(root *TreeNode, num *[]int) {
 	*num = append(*num, root.Val)
 	dfs(root.Right, num)
 }
+
+// https://leetcode-cn.com/problems/average-of-levels-in-binary-tree/
+// 二叉树的层平均值
+func averageOfLevels(root *TreeNode) []float64 {
+	var r []float64
+	queue := make([]*TreeNode, 0)
+	if root != nil {
+		queue = append(queue, root)
+	}
+	for len(queue) > 0 {
+		var s float64
+		t := make([]*TreeNode, 0)
+		for i := 0; i < len(queue); i++ {
+			v := queue[i]
+			s += float64(v.Val)
+			if v.Left != nil {
+				t = append(t, v.Left)
+			}
+			if v.Right != nil {
+				t = append(t, v.Right)
+			}
+		}
+		r = append(r, s/float64(len(queue)))
+		queue = t
+	}
+	return r
+}

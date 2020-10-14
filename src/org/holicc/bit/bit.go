@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	println(strToInt("-2147483647"))
+	println(hammingWeight(0000000000000000000000000000101))
 }
 
 //1～n整数中1出现的次数
@@ -118,4 +118,20 @@ func getDecimalValue(head *ListNode) int {
 		head = head.Next
 	}
 	return result
+}
+
+// https://leetcode-cn.com/problems/divisor-game/
+// 除数博弈
+func divisorGame(N int) bool {
+	return N%2 == 0
+}
+
+// https://leetcode-cn.com/problems/number-of-1-bits/
+// 位1的个数
+func hammingWeight(num uint32) int {
+	var r int
+	for ; num != 0; r++ {
+		num = num & (num - 1)
+	}
+	return r
 }
