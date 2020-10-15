@@ -330,6 +330,47 @@ func countCharacters(words []string, chars string) int {
 	return r
 }
 
-func main() {
-	println(countCharacters([]string{"cat", "bt", "hat", "tree"}, "atach"))
+// https://leetcode-cn.com/problems/remove-all-adjacent-duplicates-in-string/
+// 删除字符串中的所有相邻重复项
+func removeDuplicates(S string) string {
+	stack := make([]byte, 0)
+	for i := 0; i < len(S); i++ {
+		if len(stack) > 0 && stack[len(stack)-1] == S[i] {
+			stack = stack[:len(stack)-1]
+		} else {
+			stack = append(stack, S[i])
+		}
+	}
+	return string(stack)
+}
+
+// https://leetcode-cn.com/problems/baseball-game/
+// 棒球比赛
+func calPoints(ops []string) int {
+	var r int
+	stack := make([]int, 0)
+	for _, c := range ops {
+		switch c {
+		case "+":
+			if len(stack) >= 1 {
+				stack = append(stack, stack[len(stack)-1]+stack[len(stack)-2])
+			} else if len(stack) > 0 {
+				stack = append(stack, stack[len(stack)-1])
+			}
+		case "D":
+			stack = append(stack, stack[len(stack)-1]*2)
+		case "C":
+			if len(stack) > 0 {
+				stack = stack[:len(stack)-1]
+			}
+		default:
+			t, _ := strconv.Atoi(c)
+			stack = append(stack, t)
+		}
+	}
+	//
+	for _, c := range stack {
+		r += c
+	}
+	return r
 }

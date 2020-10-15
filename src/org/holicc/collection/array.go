@@ -1,15 +1,10 @@
 package main
 
 import (
-	"fmt"
 	"math"
 	"sort"
 	"strconv"
 )
-
-func main() {
-	fmt.Println(restoreString("aiohn", []int{3, 1, 4, 2, 0}))
-}
 
 //数字序列中某一位的数字
 //https://leetcode-cn.com/problems/shu-zi-xu-lie-zhong-mou-yi-wei-de-shu-zi-lcof/
@@ -500,4 +495,27 @@ func minSubsequence(nums []int) []int {
 		}
 	}
 	return r
+}
+
+// https://leetcode-cn.com/problems/island-perimeter/
+// 岛屿的周长
+func islandPerimeter(grid [][]int) int {
+	if len(grid) == 0 {
+		return 0
+	}
+	count := 0
+	for i := 0; i < len(grid); i++ {
+		for j := 0; j < len(grid[i]); j++ {
+			if grid[i][j] == 1 {
+				count += 4
+				if i > 0 && grid[i-1][j] == 1 {
+					count -= 2
+				}
+				if j > 0 && grid[i][j-1] == 1 {
+					count -= 2
+				}
+			}
+		}
+	}
+	return count
 }
