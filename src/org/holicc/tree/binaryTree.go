@@ -135,3 +135,34 @@ func averageOfLevels(root *TreeNode) []float64 {
 	}
 	return r
 }
+
+// https://leetcode-cn.com/problems/binary-tree-level-order-traversal-ii/
+// 二叉树的层次遍历 II
+func levelOrderBottom(root *TreeNode) [][]int {
+	queue := make([]*TreeNode, 0)
+	if root != nil {
+		queue = append(queue, root)
+	}
+	var r [][]int
+	for len(queue) > 0 {
+		rr := make([]int, 0)
+		t := make([]*TreeNode, 0)
+		for _, n := range queue {
+			rr = append(rr, n.Val)
+			if n.Left != nil {
+				t = append(t, n.Left)
+			}
+			if n.Right != nil {
+				t = append(t, n.Right)
+			}
+		}
+		r = append(r, rr)
+		queue = t
+	}
+	for i := 0; i < len(r)/2; i++ {
+		t := r[i]
+		r[i] = r[len(r)-1-i]
+		r[len(r)-1-i] = t
+	}
+	return r
+}

@@ -2,6 +2,7 @@ package main
 
 import (
 	"math"
+	"sort"
 	"strings"
 )
 
@@ -134,4 +135,34 @@ func hammingWeight(num uint32) int {
 		num = num & (num - 1)
 	}
 	return r
+}
+
+// https://leetcode-cn.com/problems/add-digits/
+// 各位相加 模九 数根
+func addDigits(num int) int {
+	return (num-1)%9 + 1
+}
+
+// https://leetcode-cn.com/problems/sort-integers-by-the-number-of-1-bits/
+// 根据数字二进制下 1 的数目排序
+func sortByBits(arr []int) []int {
+	ret := make([]int, len(arr))
+	for i := 0; i < len(arr); i++ {
+		ret[i] = bitCount(arr[i])*10000000 + arr[i]
+	}
+	sort.Ints(ret)
+	for i := 0; i < len(arr); i++ {
+		ret[i] = ret[i] % 10000000
+	}
+	return ret
+}
+
+// Java Integer.bitCount 实现
+func bitCount(i int) int {
+	i = i - ((i >> 1) & 0x55555555)
+	i = (i & 0x33333333) + ((i >> 2) & 0x33333333)
+	i = (i + (i >> 4)) & 0x0f0f0f0f
+	i = i + (i >> 8)
+	i = i + (i >> 16)
+	return i & 0x3f
 }

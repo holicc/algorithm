@@ -519,3 +519,73 @@ func islandPerimeter(grid [][]int) int {
 	}
 	return count
 }
+
+// https://leetcode-cn.com/problems/minimum-value-to-get-positive-step-by-step-sum/
+// 逐步求和得到正数的最小值
+func minStartValue(nums []int) int {
+	sum := 0
+	min := 0
+	for _, num := range nums {
+		sum += num
+		if sum < min {
+			min = sum
+		}
+	}
+	return 1 - min
+}
+
+// https://leetcode-cn.com/problems/distribute-candies/
+// 分糖果
+func distributeCandies(candies []int) int {
+	color := make(map[int]bool)
+	for _, val := range candies {
+		color[val] = false
+	}
+	if len(color) > len(candies)/2 {
+		return len(candies) / 2
+	}
+	return len(color)
+}
+
+func main() {
+	println(minOperations([]string{"./", "../", "./"}))
+}
+
+// https://leetcode-cn.com/problems/crawler-log-folder/
+// 文件夹操作日志搜集器
+func minOperations(logs []string) int {
+	s := make([]string, 0)
+	for _, o := range logs {
+		if o == "../" {
+			if len(s) > 0 {
+				s = s[:len(s)-1]
+			}
+		} else if o != "./" {
+			s = append(s, o)
+		}
+	}
+	return len(s)
+}
+
+// https://leetcode-cn.com/problems/pascals-triangle/
+// 杨辉三角
+func generate(numRows int) [][]int {
+	var res [][]int = [][]int{
+		{1},
+		{1, 1},
+	}
+	if numRows < 2 {
+		return res[0:numRows]
+	}
+
+	for i := 2; i < numRows; i++ {
+		var row = []int{1}
+		for j := 1; j < i; j++ {
+			row = append(row, res[i-1][j-1]+res[i-1][j])
+		}
+		row = append(row, 1)
+		res = append(res, row)
+	}
+
+	return res
+}
