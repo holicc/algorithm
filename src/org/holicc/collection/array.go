@@ -547,10 +547,6 @@ func distributeCandies(candies []int) int {
 	return len(color)
 }
 
-func main() {
-	println(minOperations([]string{"./", "../", "./"}))
-}
-
 // https://leetcode-cn.com/problems/crawler-log-folder/
 // 文件夹操作日志搜集器
 func minOperations(logs []string) int {
@@ -587,5 +583,98 @@ func generate(numRows int) [][]int {
 		res = append(res, row)
 	}
 
+	return res
+}
+
+func main() {
+	println(average([]int{4000, 3000, 1000, 2000}))
+}
+
+// https://leetcode-cn.com/problems/average-salary-excluding-the-minimum-and-maximum-salary/
+// 	去掉最低工资和最高工资后的工资平均值
+func average(salary []int) float64 {
+	var max, min = 0, math.MaxInt32
+	sum := 0
+	for _, v := range salary {
+		if v > max {
+			max = v
+		}
+		if v < min {
+			min = v
+		}
+		sum += v
+	}
+	return float64(sum-max-min) / float64(len(salary)-2)
+}
+
+// https://leetcode-cn.com/problems/minimum-absolute-difference/
+// 最小绝对差
+func minimumAbsDifference(arr []int) [][]int {
+	sort.Ints(arr)
+	l := len(arr)
+	var result [][]int
+	min := arr[l-1] - arr[0]
+	for i := 1; i < l; i++ {
+		cha := arr[i] - arr[i-1]
+		if cha < min {
+			min = cha
+			result = [][]int{}
+			result = append(result, []int{arr[i-1], arr[i]})
+		} else if cha == min {
+			result = append(result, []int{arr[i-1], arr[i]})
+		}
+	}
+	return result
+}
+
+// https://leetcode-cn.com/problems/relative-sort-array/
+// 数组的相对排序
+func relativeSortArray(arr1 []int, arr2 []int) []int {
+	hash := make(map[int]int, 0)
+	res := make([]int, 0)
+
+	if len(arr2) == 0 {
+		sort.Ints(arr1)
+		return arr1
+	}
+
+	for _, v := range arr1 {
+		hash[v]++
+	}
+	for i := 0; i < len(arr2); i++ {
+		for j := 0; j < hash[arr2[i]]; j++ {
+			res = append(res, arr2[i])
+		}
+		hash[arr2[i]] = 0
+	}
+
+	temp := make([]int, 0)
+	for k, v := range hash {
+		for v > 0 {
+			temp = append(temp, k)
+			v--
+		}
+	}
+	sort.Ints(temp)
+
+	res = append(res, temp...)
+	return res
+}
+
+// https://leetcode-cn.com/problems/reshape-the-matrix/solution/golang-yi-ceng-for15xing-dai-ma-si-lu-qing-xi-ban-/
+// 重塑矩阵 取余取模，定位索引
+func matrixReshape(nums [][]int, r int, c int) [][]int {
+	row, col := len(nums), len(nums[0])
+	if row*col != r*c {
+		return nums
+	}
+	res := make([][]int, r)
+	for i := 0; i < len(res); i++ {
+		res[i] = make([]int, c)
+	}
+
+	for i := 0; i < r*c; i++ {
+		res[i/c][i%c] = nums[i/col][i%col]
+	}
 	return res
 }

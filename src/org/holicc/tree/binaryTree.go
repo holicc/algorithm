@@ -166,3 +166,37 @@ func levelOrderBottom(root *TreeNode) [][]int {
 	}
 	return r
 }
+
+// https://leetcode-cn.com/problems/sum-of-root-to-leaf-binary-numbers/solution/
+// 从根到叶的二进制数之和
+func sumRootToLeaf(root *TreeNode) int {
+	return f(root, 0)
+}
+
+func f(root *TreeNode, r int) int {
+	if root != nil {
+		r = r*2 + root.Val
+		if root.Left == nil && root.Right == nil {
+			return r
+		}
+		return f(root.Left, r) + f(root.Right, r)
+	}
+	return 0
+}
+
+// https://leetcode-cn.com/problems/trim-a-binary-search-tree/
+// 修剪二叉搜索树
+func trimBST(root *TreeNode, L int, R int) *TreeNode {
+	if root == nil {
+		return nil
+	}
+	if root.Val < L {
+		return trimBST(root.Right, L, R)
+	}
+	if root.Val > R {
+		return trimBST(root.Left, L, R)
+	}
+	root.Left = trimBST(root.Left, L, R)
+	root.Right = trimBST(root.Right, L, R)
+	return root
+}
