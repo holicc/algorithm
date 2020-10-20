@@ -374,3 +374,24 @@ func calPoints(ops []string) int {
 	}
 	return r
 }
+
+// https://leetcode-cn.com/problems/remove-palindromic-subsequences/
+// 删除回文子序列
+func removePalindromeSub(s string) int {
+	l := len(s)
+	if l == 0 {
+		return 0
+	}
+	if s == reverseString(s) {
+		return 1
+	}
+	return 2
+}
+
+func reverseString(s string) string {
+	r := []byte(s)
+	for i, j := 0, len(r)-1; i < j; i, j = i+1, j-1 {
+		r[i], r[j] = r[j], r[i]
+	}
+	return string(r)
+}

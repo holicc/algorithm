@@ -2,6 +2,7 @@ package main
 
 import (
 	"math"
+	"strconv"
 )
 
 type TreeNode struct {
@@ -199,4 +200,28 @@ func trimBST(root *TreeNode, L int, R int) *TreeNode {
 	root.Left = trimBST(root.Left, L, R)
 	root.Right = trimBST(root.Right, L, R)
 	return root
+}
+
+// https://leetcode-cn.com/problems/binary-tree-paths/
+// 二叉树的所有路径
+var paths []string
+
+func binaryTreePaths(root *TreeNode) []string {
+	paths = []string{}
+	constructPaths(root, "")
+	return paths
+}
+
+func constructPaths(root *TreeNode, path string) {
+	if root != nil {
+		pathSB := path
+		pathSB += strconv.Itoa(root.Val)
+		if root.Left == nil && root.Right == nil {
+			paths = append(paths, pathSB)
+		} else {
+			pathSB += "->"
+			constructPaths(root.Left, pathSB)
+			constructPaths(root.Right, pathSB)
+		}
+	}
 }

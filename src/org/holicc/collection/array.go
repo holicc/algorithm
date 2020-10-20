@@ -678,3 +678,44 @@ func matrixReshape(nums [][]int, r int, c int) [][]int {
 	}
 	return res
 }
+
+// https://leetcode-cn.com/problems/toeplitz-matrix/
+// 托普利茨矩阵
+func isToeplitzMatrix(matrix [][]int) bool {
+	hash := make(map[int]int)
+	for i := 0; i < len(matrix); i++ {
+		for j := 0; j < len(matrix[0]); j++ {
+			if _, ok := hash[i-j]; ok {
+				if hash[i-j] != matrix[i][j] {
+					return false
+				}
+			} else {
+				hash[i-j] = matrix[i][j]
+			}
+		}
+	}
+	return true
+}
+
+// https://leetcode-cn.com/problems/projection-area-of-3d-shapes/
+// 三维形体投影面积
+func projectionArea(grid [][]int) int {
+	N := len(grid)
+	result := 0
+	for row := 0; row < N; row++ {
+		rowMax, colMax := 0, 0
+		for col := 0; col < N; col++ {
+			if grid[row][col] != 0 {
+				result++
+			}
+			if grid[row][col] > rowMax {
+				rowMax = grid[row][col]
+			}
+			if grid[col][row] > colMax {
+				colMax = grid[col][row]
+			}
+		}
+		result += rowMax + colMax
+	}
+	return result
+}
