@@ -719,3 +719,45 @@ func projectionArea(grid [][]int) int {
 	}
 	return result
 }
+
+// https://leetcode-cn.com/problems/next-greater-element-i/solution/golangdan-diao-zhan-fa-by-bloodborne/
+// 下一个更大元素 I
+func nextGreaterElement(nums1 []int, nums2 []int) []int {
+	m := make(map[int]int)
+	var stack []int
+	for _, v := range nums2 {
+		for len(stack) != 0 && v > stack[len(stack)-1] {
+			// 发现有更大的数字，给其下一个更大数字赋值
+			m[stack[len(stack)-1]] = v
+			stack = stack[:len(stack)-1]
+		}
+		stack = append(stack, v)
+	}
+	for k, v := range nums1 {
+		if value, ok := m[v]; ok {
+			nums1[k] = value
+		} else {
+			nums1[k] = -1
+		}
+	}
+	return nums1
+}
+
+// https://leetcode-cn.com/problems/build-an-array-with-stack-operations/
+// 用栈操作构建数组
+func buildArray(target []int, n int) []string {
+	res := make([]string, 0)
+	num := 0
+	for i := 1; i <= n; i++ {
+		if i > target[len(target)-1] {
+			return res
+		} else if i == target[num] {
+			res = append(res, "Push")
+			num++
+		} else {
+			res = append(res, "Push")
+			res = append(res, "Pop")
+		}
+	}
+	return res
+}

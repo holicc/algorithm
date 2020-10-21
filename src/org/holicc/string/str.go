@@ -395,3 +395,21 @@ func reverseString(s string) string {
 	}
 	return string(r)
 }
+
+// https://leetcode-cn.com/problems/number-of-lines-to-write-string/
+// 写字符串需要的行数
+func numberOfLines(widths []int, S string) []int {
+	res := make([]int, 2)
+	var length, row int = 0, 1 //length为当前行的当前长度，row为当前行数
+	for i := 0; i < len(S); i++ {
+		if length+widths[S[i]-'a'] > 100 { //如果当前长度加上下一个字符长度超过100，说明当前行剩下的长度
+			row++ //不足以放下一个字符，所以重开一行，放下一个字符，length变为新一行当前的长度
+			length = widths[S[i]-'a']
+		} else {
+			length += widths[S[i]-'a']
+		}
+	}
+	res[0] = row    //行数
+	res[1] = length //最后一行长度
+	return res
+}

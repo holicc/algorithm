@@ -1,5 +1,7 @@
 package math
 
+import "fmt"
+
 // https://leetcode-cn.com/problems/water-bottles/
 // 换酒问题
 func numWaterBottles(numBottles int, numExchange int) int {
@@ -19,4 +21,23 @@ func fraction(cont []int) []int {
 		result[0], result[1] = cont[i]*result[0]+result[1], result[0]
 	}
 	return result
+}
+
+// https://leetcode-cn.com/problems/fizz-buzz/
+// Fizz Buzz
+func fizzBuzz(n int) []string {
+	list := make([]string, n)
+	// 初始化赋值
+	for i := 0; i < n; i, list[i] = i+1, fmt.Sprintf("%d", i+1) {
+	}
+	// 给3的倍数赋值
+	for i := 2; i < n; i, list[i] = i+3, "Fizz" {
+	}
+	// 给5的倍数赋值
+	for i := 4; i < n; i, list[i] = i+5, "Buzz" {
+	}
+	// 给3和5的倍数(即最小公倍数)赋值
+	for i := 14; i < n; i, list[i] = i+15, "FizzBuzz" {
+	}
+	return list
 }
