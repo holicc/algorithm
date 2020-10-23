@@ -413,3 +413,42 @@ func numberOfLines(widths []int, S string) []int {
 	res[1] = length //最后一行长度
 	return res
 }
+
+// https://leetcode-cn.com/problems/largest-substring-between-two-equal-characters/
+// 两个相同字符之间的最长子字符串
+func maxLengthBetweenEqualCharacters(s string) int {
+	m := make(map[byte]int)
+	for i := range s {
+		m[s[i]] = i
+	}
+	//
+	var r = -1
+	for i := range s {
+		if r < m[s[i]]-i {
+			r = m[s[i]] - i
+		}
+	}
+	return r - 1
+}
+
+// https://leetcode-cn.com/problems/find-the-difference/
+// 找不同
+func findTheDifference(s string, t string) byte {
+	hash := make(map[byte]int)
+	var res byte
+
+	for k, _ := range t {
+		hash[t[k]]++
+	}
+
+	for k, _ := range s {
+		hash[s[k]]--
+	}
+
+	for k, v := range hash {
+		if v == 1 {
+			res = k
+		}
+	}
+	return res
+}

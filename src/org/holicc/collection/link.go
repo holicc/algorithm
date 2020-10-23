@@ -60,3 +60,30 @@ func swapPairs(head *ListNode) *ListNode {
 	}
 	return r.Next
 }
+
+// https://leetcode-cn.com/problems/merge-two-sorted-lists/
+// 合并两个有序链表
+func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
+	r := &ListNode{
+		Val:  -1,
+		Next: nil,
+	}
+	rr := r
+	for l1 != nil && l2 != nil {
+		if l1.Val > l2.Val {
+			r.Next = l2
+			l2 = l2.Next
+		} else if l1.Val <= l2.Val {
+			r.Next = l1
+			l1 = l1.Next
+		}
+		r = r.Next
+	}
+	if l1 != nil {
+		r.Next = l1
+	}
+	if l2 != nil {
+		r.Next = l2
+	}
+	return rr.Next
+}

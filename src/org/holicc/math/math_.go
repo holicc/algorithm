@@ -41,3 +41,13 @@ func fizzBuzz(n int) []string {
 	}
 	return list
 }
+
+// https://leetcode-cn.com/problems/qi-wang-ge-shu-tong-ji/
+// 期望个数统计
+func expectNumber(scores []int) int {
+	s := make(map[int]bool, len(scores))
+	for _, i := range scores {
+		s[i] = false
+	}
+	return len(s)
+}

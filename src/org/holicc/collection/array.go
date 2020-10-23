@@ -586,10 +586,6 @@ func generate(numRows int) [][]int {
 	return res
 }
 
-func main() {
-	println(average([]int{4000, 3000, 1000, 2000}))
-}
-
 // https://leetcode-cn.com/problems/average-salary-excluding-the-minimum-and-maximum-salary/
 // 	去掉最低工资和最高工资后的工资平均值
 func average(salary []int) float64 {
@@ -760,4 +756,91 @@ func buildArray(target []int, n int) []string {
 		}
 	}
 	return res
+}
+
+// https://leetcode-cn.com/problems/majority-element/
+// 多数元素
+func majorityElement(nums []int) int {
+	m := make(map[int]int)
+	for _, v := range nums {
+		m[v]++
+	}
+	for k, v := range m {
+		if v >= len(nums)/2 {
+			return k
+		}
+	}
+	return -1
+}
+
+// https://leetcode-cn.com/problems/matrix-cells-in-distance-order/
+// 距离顺序排列矩阵单元格
+func allCellsDistOrder(R int, C int, r0 int, c0 int) [][]int {
+	result := make([][]int, R*C)
+	k := 0
+	for r := 0; r < R; r++ {
+		for c := 0; c < C; c++ {
+			result[k] = []int{r, c}
+			k++
+		}
+	}
+	sort.Slice(result, func(i, j int) bool {
+		return Abs(result[i][0]-r0)+Abs(result[i][1]-c0) < Abs(result[j][0]-r0)+Abs(result[j][1]-c0)
+	})
+	return result
+}
+
+func main() {
+	kWeakestRows([][]int{
+		{1, 1, 0, 0, 0},
+		{1, 1, 1, 1, 0},
+		{1, 0, 0, 0, 0},
+		{1, 1, 0, 0, 0},
+		{1, 1, 1, 1, 1},
+	}, 3)
+}
+
+// https://leetcode-cn.com/problems/the-k-weakest-rows-in-a-matrix/
+// 方阵中战斗力最弱的 K 行
+func kWeakestRows(mat [][]int, k int) []int {
+	ans := make([]int, 0, k)
+	m := make(map[int][]int)
+	for index, line := range mat {
+		num := 0
+		for _, v := range line {
+			if 1 == v {
+				num++
+			}
+		}
+		m[num] = append(m[num], index)
+	}
+	for i := 0; i <= len(mat[0]); i++ {
+		ans = append(ans, m[i]...)
+		if len(ans) >= k {
+			ans = ans[:k]
+			break
+		}
+	}
+
+	return ans
+}
+
+// https://leetcode-cn.com/problems/distribute-candies-to-people/
+// 分糖果 II
+func distributeCandies2(candies int, num_people int) []int {
+	r := make([]int, num_people)
+	for i, l := 0, 0; candies > 0; i++ {
+		if i >= len(r) {
+			i = 0
+			l++
+		}
+		c := i + (num_people * l) + 1
+		if c > candies {
+			r[i] += candies
+		} else {
+			r[i] += c
+		}
+		candies -= c
+	}
+	return r
 }
