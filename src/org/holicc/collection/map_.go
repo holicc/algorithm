@@ -34,3 +34,31 @@ func specialArray(nums []int) int {
 	}
 	return -1
 }
+
+// https://leetcode-cn.com/problems/roman-to-integer/
+// 罗马数字转整数
+func romanToInt(s string) int {
+	var _map = map[byte]int{
+		'I': 1,
+		'V': 5,
+		'X': 10,
+		'L': 50,
+		'C': 100,
+		'D': 500,
+		'M': 1000,
+	}
+	// XXVII等于1+1+5+10+10 = 27 、IX等于10-1=9、XCI等于1+100-10。
+
+	// 当右边的字符比左边的大， 说明是特殊组合
+	pre, r := 0, 0
+	for i := len(s) - 1; i >= 0; i-- {
+		cur := _map[s[i]]
+		if cur >= pre {
+			r += cur
+		} else {
+			r -= cur
+		}
+		pre = cur
+	}
+	return r
+}
