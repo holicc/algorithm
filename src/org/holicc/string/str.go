@@ -480,3 +480,16 @@ func min(x, y int) int {
 	}
 	return y
 }
+
+// https://leetcode-cn.com/problems/occurrences-after-bigram/
+// Bigram 分词
+func findOcurrences(text string, first string, second string) []string {
+	var res []string
+	s := strings.Split(text, " ")
+	for i := 0; i < len(s)-2; i++ {
+		if s[i] == first && s[i+1] == second {
+			res = append(res, s[i+2])
+		}
+	}
+	return res
+}
