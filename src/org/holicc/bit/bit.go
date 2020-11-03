@@ -191,3 +191,25 @@ func reverseBits(num uint32) uint32 {
 	}
 	return uint32(ret)
 }
+
+// https://leetcode-cn.com/problems/binary-gap/
+// 二进制间距
+func binaryGap(N int) int {
+	var last, ans int = -1, 0
+	var i uint
+	for i = 0; i < 32; i++ {
+		if (N>>i)&1 > 0 {
+			if last >= 0 {
+				ans = max(ans, int(i)-last)
+			}
+			last = int(i)
+		}
+	}
+	return ans
+}
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
