@@ -2,8 +2,11 @@ package main
 
 import (
 	"math"
+	"math/rand"
 	"sort"
+	"strconv"
 	"strings"
+	"time"
 )
 
 func main() {
@@ -212,4 +215,18 @@ func max(a, b int) int {
 		return a
 	}
 	return b
+}
+
+// https://leetcode-cn.com/problems/convert-integer-to-the-sum-of-two-no-zero-integers/
+// 将整数转换为两个无零整数的和
+func getNoZeroIntegers(n int) []int {
+	rand.Seed(time.Now().Unix())
+	for {
+		count := rand.Intn(n)
+		count_string := strconv.Itoa(count)
+		count2_string := strconv.Itoa(n - count)
+		if !strings.Contains(count_string, "0") && !strings.Contains(count2_string, "0") {
+			return []int{count, n - count}
+		}
+	}
 }

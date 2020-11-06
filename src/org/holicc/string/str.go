@@ -493,3 +493,31 @@ func findOcurrences(text string, first string, second string) []string {
 	}
 	return res
 }
+
+// https://leetcode-cn.com/problems/compare-strings-by-frequency-of-the-smallest-character/submissions/
+// 比较字符串最小字母出现频次
+func numSmallerByFrequency(queries []string, words []string) (ans []int) {
+	for _, qv := range queries {
+		c := 0
+		for _, wv := range words {
+			if do(qv, wv) == true {
+				c++
+			}
+		}
+		ans = append(ans, c)
+	}
+	return ans
+}
+func do(p, q string) (ans bool) {
+	return count(p) < count(q)
+}
+func count(s string) (ans int) {
+	ar := []byte(s)
+	k := ar[0]
+	for _, v := range ar {
+		if v < k {
+			k = v
+		}
+	}
+	return strings.Count(s, string(k))
+}
