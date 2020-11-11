@@ -67,3 +67,21 @@ func getRow(rowIndex int) []int {
 	}
 	return nums
 }
+
+func isHappy(n int) bool {
+	m := map[int]bool{}
+	for ; n != 1 && !m[n]; n, m[n] = step(n), true {
+	}
+	return n == 1
+}
+
+// https://leetcode-cn.com/problems/happy-number/
+// 快乐数
+func step(n int) int {
+	sum := 0
+	for n > 0 {
+		sum += (n % 10) * (n % 10)
+		n = n / 10
+	}
+	return sum
+}
