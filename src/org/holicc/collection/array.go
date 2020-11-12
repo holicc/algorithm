@@ -868,3 +868,17 @@ func abs(i int) int {
 	}
 	return i
 }
+
+// https://leetcode-cn.com/problems/element-appearing-more-than-25-in-sorted-array/
+// 有序数组中出现次数超过25%的元素
+func findSpecialInteger(arr []int) int {
+
+	var n = (len(arr) + 4) / 4
+
+	for i := 0; i < len(arr); i++ {
+		if arr[i] == arr[n-1+i] {
+			return arr[i]
+		}
+	}
+	return -1
+}
