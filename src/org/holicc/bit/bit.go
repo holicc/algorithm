@@ -230,3 +230,10 @@ func getNoZeroIntegers(n int) []int {
 		}
 	}
 }
+
+// https://leetcode-cn.com/problems/binary-number-with-alternating-bits/submissions/
+// 交替位二进制数
+func hasAlternatingBits(n int) bool {
+	n = n ^ (n >> 1)
+	return (n & (n + 1)) == 0
+}
