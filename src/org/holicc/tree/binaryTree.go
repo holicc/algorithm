@@ -267,3 +267,23 @@ func dfs_0(root *TreeNode, leafs *[]int) {
 		dfs(root.Right, leafs)
 	}
 }
+
+// https://leetcode-cn.com/problems/minimum-absolute-difference-in-bst/
+// 二叉搜索树的最小绝对差
+func getMinimumDifference(root *TreeNode) int {
+	ans, pre := math.MaxInt64, -1
+	var dfs func(*TreeNode)
+	dfs = func(node *TreeNode) {
+		if node == nil {
+			return
+		}
+		dfs(node.Left)
+		if pre != -1 && node.Val-pre < ans {
+			ans = node.Val - pre
+		}
+		pre = node.Val
+		dfs(node.Right)
+	}
+	dfs(root)
+	return ans
+}
