@@ -1,6 +1,8 @@
 package math
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // https://leetcode-cn.com/problems/water-bottles/
 // 换酒问题
@@ -84,4 +86,16 @@ func step(n int) int {
 		n = n / 10
 	}
 	return sum
+}
+
+// https://leetcode-cn.com/problems/day-of-the-week/
+// 一周中的第几天
+func dayOfTheWeek(day int, month int, year int) string {
+	if month == 1 || month == 2 {
+		month += 12
+		year--
+	}
+	iWeek := (day + 2*month + 3*(month+1)/5 + year + year/4 - year/100 + year/400) % 7
+	r := []string{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"}
+	return r[iWeek]
 }

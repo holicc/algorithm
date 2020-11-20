@@ -880,3 +880,25 @@ func findSpecialInteger(arr []int) int {
 	}
 	return -1
 }
+
+// https://leetcode-cn.com/problems/find-all-numbers-disappeared-in-an-array/
+// 找到所有数组中消失的数字
+func findDisappearedNumbers(nums []int) []int {
+	length := len(nums)
+	result := make([]int, length+1, length+1)
+
+	for _, v := range nums {
+		result[v] = -1
+	}
+
+	for i := 1; i < length+1; i++ {
+		if result[i] != -1 {
+			result = append(result, i)
+		}
+	}
+
+	if len(result) > length+1 {
+		return result[length+1:]
+	}
+	return []int{}
+}
