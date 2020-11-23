@@ -1,6 +1,7 @@
 package main
 
 import (
+	"sort"
 	"strconv"
 	"strings"
 )
@@ -520,4 +521,24 @@ func count(s string) (ans int) {
 		}
 	}
 	return strings.Count(s, string(k))
+}
+
+// https://leetcode-cn.com/problems/string-matching-in-an-array/submissions/
+// 数组中的字符串匹配
+func stringMatching(words []string) []string {
+	d := make(map[string]bool, len(words))
+	sort.Slice(words, func(i, j int) bool { return len(words[i]) < len(words[j]) })
+	for i, n := 0, len(words); i < n; i++ {
+		for j := i + 1; j < n; j++ {
+			if strings.Contains(words[j], words[i]) {
+				d[words[i]] = false
+			}
+		}
+	}
+	ans, i := make([]string, len(d)), 0
+	for w := range d {
+		ans[i] = w
+		i++
+	}
+	return ans
 }
