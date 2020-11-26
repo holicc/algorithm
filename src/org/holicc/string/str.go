@@ -542,3 +542,35 @@ func stringMatching(words []string) []string {
 	}
 	return ans
 }
+
+// https://leetcode-cn.com/problems/goat-latin/
+// 山羊拉丁文
+func toGoatLatin(S string) string {
+	var yuanYinMap = map[byte]bool{
+		'a': true,
+		'e': true,
+		'i': true,
+		'o': true,
+		'u': true,
+		'A': true,
+		'E': true,
+		'I': true,
+		'O': true,
+		'U': true,
+	}
+	sliceWorlds := strings.Split(S, " ")
+	result := make([]string, len(sliceWorlds))
+	i := 0
+	for _, world := range sliceWorlds {
+		tmp := []byte(world)
+		if _, ok := yuanYinMap[tmp[0]]; ok {
+			result[i] = world + "ma"
+		} else {
+			result[i] = world[1:] + world[0:1] + "ma"
+		}
+		result[i] = result[i] + strings.Repeat("a", i+1)
+		i++
+	}
+
+	return strings.Join(result, " ")
+}

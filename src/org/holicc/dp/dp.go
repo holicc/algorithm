@@ -84,3 +84,19 @@ func numWays(n int, relation [][]int, k int) int {
 	}
 	return d[n-1]
 }
+
+// https://leetcode-cn.com/problems/rotated-digits/
+// 旋转数字
+func rotatedDigits(N int) int {
+	r, d := 0, make([]int, N+1)
+	copy(d, []int{0, 0, 1, -1, -1, 1, 1, -1, 0, 1})
+	//
+	for i := 0; i <= N; i++ {
+		if d[i/10] == -1 || d[i%10] == -1 {
+			d[i] = -1
+		} else if d[i] = d[i/10] | d[i%10]; d[i] == 1 {
+			r++
+		}
+	}
+	return r
+}
