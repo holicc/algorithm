@@ -914,3 +914,22 @@ func largestPerimeter(a []int) int {
 	}
 	return 0
 }
+
+// https://leetcode-cn.com/problems/sum-of-even-numbers-after-queries/
+// 查询后的偶数和
+func sumEvenAfterQueries(A []int, queries [][]int) []int {
+	r := make([]int, len(queries))
+	for i := range queries {
+		val := queries[i][0]
+		index := queries[i][1]
+		A[index] += val
+		sum := 0
+		for _, v := range A {
+			if (v % 2) == 0 {
+				sum += v
+			}
+		}
+		r[i] = sum
+	}
+	return r
+}
