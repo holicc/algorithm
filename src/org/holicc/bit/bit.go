@@ -237,3 +237,18 @@ func hasAlternatingBits(n int) bool {
 	n = n ^ (n >> 1)
 	return (n & (n + 1)) == 0
 }
+
+// https://leetcode-cn.com/problems/complement-of-base-10-integer/
+// 十进制整数的反码
+func bitwiseComplement(N int) int {
+	if N == 0 {
+		return 1
+	}
+
+	temp := 1
+	for i := N; i > 0; i /= 2 {
+		temp <<= 1
+	}
+
+	return (temp - 1) ^ N
+}
