@@ -933,3 +933,24 @@ func sumEvenAfterQueries(A []int, queries [][]int) []int {
 	}
 	return r
 }
+
+type Employee struct {
+	Id           int
+	Importance   int
+	Subordinates []int
+}
+
+// https://leetcode-cn.com/problems/employee-importance/
+// 员工的重要性
+func getImportance(employees []*Employee, id int) int {
+	for i := range employees {
+		if employees[i].Id == id {
+			var s int
+			for _, sub := range employees[i].Subordinates {
+				s += getImportance(employees, sub)
+			}
+			return employees[i].Importance + s
+		}
+	}
+	return 0
+}
