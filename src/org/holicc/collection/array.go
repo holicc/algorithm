@@ -790,16 +790,6 @@ func allCellsDistOrder(R int, C int, r0 int, c0 int) [][]int {
 	return result
 }
 
-func main() {
-	kWeakestRows([][]int{
-		{1, 1, 0, 0, 0},
-		{1, 1, 1, 1, 0},
-		{1, 0, 0, 0, 0},
-		{1, 1, 0, 0, 0},
-		{1, 1, 1, 1, 1},
-	}, 3)
-}
-
 // https://leetcode-cn.com/problems/the-k-weakest-rows-in-a-matrix/
 // 方阵中战斗力最弱的 K 行
 func kWeakestRows(mat [][]int, k int) []int {
@@ -953,4 +943,32 @@ func getImportance(employees []*Employee, id int) int {
 		}
 	}
 	return 0
+}
+
+func main() {
+	println(removeElement([]int{3, 2}, 3))
+	println(removeElement([]int{3, 3}, 3))
+	println(removeElement([]int{1, 2, 2, 3, 3}, 3))
+	println(removeElement([]int{2}, 3))
+}
+
+// https://leetcode-cn.com/problems/remove-element/
+// 移除元素
+func removeElement(nums []int, val int) int {
+	low, hi := 0, len(nums)-1
+	for low <= hi {
+		for hi > low && nums[hi] == val {
+			hi--
+		}
+		if nums[low] == val {
+			//
+			t := nums[hi]
+			nums[hi] = nums[low]
+			nums[low] = t
+			//
+			hi--
+		}
+		low++
+	}
+	return hi + 1
 }
