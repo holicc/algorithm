@@ -972,3 +972,13 @@ func removeElement(nums []int, val int) int {
 	}
 	return hi + 1
 }
+
+// https://leetcode-cn.com/problems/missing-number/
+// 丢失的数字
+func missingNumber(nums []int) int {
+	var r int
+	for _, v := range nums {
+		r += v
+	}
+	return ((1+len(nums))*len(nums))/2 - r
+}
