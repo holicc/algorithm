@@ -598,3 +598,25 @@ func isPalindrome(x int) bool {
 	// 由于处于中位的数字不影响回文（它总是与自己相等），所以我们可以简单地将其去除。
 	return x == revertedNumber || x == revertedNumber/10
 }
+
+func main() {
+	println(gcdOfStrings("ABABABAB", "ABAB"))
+}
+
+// https://leetcode-cn.com/problems/greatest-common-divisor-of-strings/
+// 字符串的最大公因子
+func gcdOfStrings(str1 string, str2 string) string {
+	if str1+str2 != str2+str1 {
+		return ""
+	}
+	gcd := func(a, b int) int {
+		r := a % b
+		for r != 0 {
+			a = b
+			b = r
+			r = a % b
+		}
+		return b
+	}
+	return str1[0:gcd(len(str1), len(str2))]
+}
