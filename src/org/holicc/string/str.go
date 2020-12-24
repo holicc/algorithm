@@ -599,10 +599,6 @@ func isPalindrome(x int) bool {
 	return x == revertedNumber || x == revertedNumber/10
 }
 
-func main() {
-	println(gcdOfStrings("ABABABAB", "ABAB"))
-}
-
 // https://leetcode-cn.com/problems/greatest-common-divisor-of-strings/
 // 字符串的最大公因子
 func gcdOfStrings(str1 string, str2 string) string {

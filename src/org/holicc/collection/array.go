@@ -982,3 +982,32 @@ func missingNumber(nums []int) int {
 	}
 	return ((1+len(nums))*len(nums))/2 - r
 }
+
+// https://leetcode-cn.com/problems/lemonade-change/
+// 柠檬水找零
+func lemonadeChange(bills []int) bool {
+	t := make([]int, 2)
+	for _, p := range bills {
+		if p == 5 {
+			t[0]++
+		}
+		if p == 10 {
+			if t[0] < 0 {
+				return false
+			}
+			t[0]--
+			t[1]++
+		}
+		if p == 20 {
+			if t[0] > 0 && t[1] > 0 {
+				t[1]--
+				t[0]--
+			} else if t[0] >= 3 {
+				t[0] -= 3
+			} else {
+				return false
+			}
+		}
+	}
+	return true
+}
