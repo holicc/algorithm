@@ -1011,3 +1011,25 @@ func lemonadeChange(bills []int) bool {
 	}
 	return true
 }
+
+// https://leetcode-cn.com/problems/flood-fill/
+// 图像渲染
+func floodFill(image [][]int, sr int, sc int, newColor int) [][]int {
+	old := image[sr][sc]
+	var bfs func(sr, sc int)
+	bfs = func(sr, sc int) {
+		if sr < 0 || sc < 0 || sr >= len(image) || sc >= len(image[sr]) {
+			return
+		}
+		if image[sr][sc] != old || image[sr][sc] == newColor {
+			return
+		}
+		image[sr][sc] = newColor
+		bfs(sr-1, sc)
+		bfs(sr, sc-1)
+		bfs(sr+1, sc)
+		bfs(sr, sc+1)
+	}
+	bfs(sr, sc)
+	return image
+}
