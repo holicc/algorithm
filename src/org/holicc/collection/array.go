@@ -1033,3 +1033,23 @@ func floodFill(image [][]int, sr int, sc int, newColor int) [][]int {
 	bfs(sr, sc)
 	return image
 }
+
+// https://leetcode-cn.com/problems/assign-cookies/
+// 分发饼干
+func findContentChildren(g []int, s []int) int {
+	var r int
+	sort.Ints(s)
+	sort.Ints(g)
+
+	for i, j := 0, 0; i < len(g) && j < len(s); i++ {
+		for j < len(s) && g[i] > s[j] {
+			j++
+		}
+		if j < len(s) {
+			j++
+			r++
+		}
+	}
+
+	return r
+}
