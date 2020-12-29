@@ -302,3 +302,30 @@ func isSameTree(p *TreeNode, q *TreeNode) bool {
 	}
 	return isSameTree(p.Left, q.Left) && isSameTree(p.Right, q.Right)
 }
+
+// https://leetcode-cn.com/problems/binary-tree-tilt/
+// 二叉树的坡度
+func findTilt(root *TreeNode) int {
+	var (
+		i   int
+		dfs func(root *TreeNode) int
+	)
+	abs := func(i int) int {
+		if i < 0 {
+			return -i
+		} else {
+			return i
+		}
+	}
+	dfs = func(root *TreeNode) int {
+		if root == nil {
+			return 0
+		}
+		l := dfs(root.Left)
+		r := dfs(root.Right)
+		i += abs(l - r)
+		return root.Val + l + r
+	}
+	dfs(root)
+	return i
+}
