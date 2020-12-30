@@ -945,13 +945,6 @@ func getImportance(employees []*Employee, id int) int {
 	return 0
 }
 
-func main() {
-	println(removeElement([]int{3, 2}, 3))
-	println(removeElement([]int{3, 3}, 3))
-	println(removeElement([]int{1, 2, 2, 3, 3}, 3))
-	println(removeElement([]int{2}, 3))
-}
-
 // https://leetcode-cn.com/problems/remove-element/
 // 移除元素
 func removeElement(nums []int, val int) int {
@@ -1052,4 +1045,15 @@ func findContentChildren(g []int, s []int) int {
 	}
 
 	return r
+}
+
+// https://leetcode-cn.com/problems/duplicate-zeros/
+// 复写零
+func duplicateZeros(arr []int) {
+	for i := 0; i < len(arr)-1; i++ {
+		if arr[i] == 0 {
+			arr = append(arr[:i+1], arr[i:len(arr)-1]...)
+			i++
+		}
+	}
 }
