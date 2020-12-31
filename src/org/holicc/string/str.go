@@ -616,3 +616,22 @@ func gcdOfStrings(str1 string, str2 string) string {
 	}
 	return str1[0:gcd(len(str1), len(str2))]
 }
+
+// https://leetcode-cn.com/problems/consecutive-characters/
+func maxPower(s string) int {
+	var (
+		r int = 1
+		x int = 1
+	)
+	for i := 1; i < len(s)-1; i++ {
+		if s[i] == s[i-1] {
+			r++
+			if r > x {
+				x = r
+			}
+		} else {
+			r = 1
+		}
+	}
+	return x
+}

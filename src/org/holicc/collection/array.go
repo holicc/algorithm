@@ -1057,3 +1057,20 @@ func duplicateZeros(arr []int) {
 		}
 	}
 }
+
+// https://leetcode-cn.com/problems/distance-between-bus-stops/
+// 公交站间的距离
+func distanceBetweenBusStops(distance []int, start int, destination int) int {
+	if start > destination {
+		start, destination = destination, start
+	}
+	l2r, r2l := 0, 0
+	for i := start; i < destination; i++ {
+		l2r += distance[i]
+	}
+	ld := len(distance)
+	for i := start + ld - 1; i >= destination; i-- {
+		r2l += distance[i%ld]
+	}
+	return int(math.Min(float64(l2r), float64(r2l)))
+}
