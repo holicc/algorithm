@@ -635,3 +635,29 @@ func maxPower(s string) int {
 	}
 	return x
 }
+
+// https://leetcode-cn.com/problems/special-positions-in-a-binary-matrix/
+// 二进制矩阵中的特殊位置
+func numSpecial(mat [][]int) int {
+	var m = len(mat)
+	var n = len(mat[0])
+	var res int
+	rows := make([]int, m)
+	cols := make([]int, n)
+	for i := 0; i < m; i++ {
+		for j := 0; j < n; j++ {
+			if mat[i][j] == 1 {
+				rows[i]++
+				cols[j]++
+			}
+		}
+	}
+	for i := 0; i < m; i++ {
+		for j := 0; j < n; j++ {
+			if mat[i][j] == 1 && rows[i] == 1 && cols[j] == 1 {
+				res++
+			}
+		}
+	}
+	return res
+}

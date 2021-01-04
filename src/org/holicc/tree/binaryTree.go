@@ -329,3 +329,27 @@ func findTilt(root *TreeNode) int {
 	dfs(root)
 	return i
 }
+
+// https://leetcode-cn.com/problems/two-sum-iv-input-is-a-bst/
+// 两数之和 IV - 输入 BST
+func findTarget(root *TreeNode, k int) (result bool) {
+	path := findBSTPath(root, map[int]bool{})
+
+	for key, _ := range path {
+		if path[k-key] && k-key != key {
+			return true
+		}
+	}
+
+	return
+}
+
+func findBSTPath(root *TreeNode, path map[int]bool) map[int]bool {
+	if root != nil {
+		path = findBSTPath(root.Left, path)
+		path[root.Val] = true
+		path = findBSTPath(root.Right, path)
+	}
+
+	return path
+}
