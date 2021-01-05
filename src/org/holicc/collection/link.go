@@ -87,3 +87,27 @@ func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
 	}
 	return rr.Next
 }
+
+// https://leetcode-cn.com/problems/intersection-of-two-linked-lists/
+// 相交链表
+func getIntersectionNode(headA, headB *ListNode) *ListNode {
+	if headA == nil || headB == nil {
+		return nil
+	}
+	tmpa, tmpb := headA, headB
+	for tmpa != tmpb {
+		if tmpa == nil {
+			tmpa = headB
+		} else {
+			tmpa = tmpa.Next
+		}
+
+		if tmpb == nil {
+			tmpb = headA
+		} else {
+			tmpb = tmpb.Next
+		}
+	}
+
+	return tmpa
+}
