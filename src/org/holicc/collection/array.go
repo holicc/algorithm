@@ -1074,3 +1074,22 @@ func distanceBetweenBusStops(distance []int, start int, destination int) int {
 	}
 	return int(math.Min(float64(l2r), float64(r2l)))
 }
+
+// https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted/
+// 两数之和 II - 输入有序数组
+func twoSum(numbers []int, target int) []int {
+	for i := 0; i < len(numbers); i++ {
+		l, h := i+1, len(numbers)-1
+		for l <= h {
+			m := int(uint(l+h) >> 1)
+			if numbers[m] == target-numbers[i] {
+				return []int{i + 1, m + 1}
+			} else if numbers[m] > target-numbers[i] {
+				h = m - 1
+			} else {
+				l = m + 1
+			}
+		}
+	}
+	return nil
+}
