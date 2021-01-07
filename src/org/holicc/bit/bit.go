@@ -252,3 +252,14 @@ func bitwiseComplement(N int) int {
 
 	return (temp - 1) ^ N
 }
+
+// https://leetcode-cn.com/problems/sum-of-two-integers/solution/wei-yun-suan-by-ba-xiang/
+// 两整数之和
+func getSum(a int, b int) int {
+	for b != 0 {
+		sum := a ^ b
+		b = (a & b) << 1
+		a = sum
+	}
+	return a
+}
