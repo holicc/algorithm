@@ -1093,3 +1093,23 @@ func twoSum(numbers []int, target int) []int {
 	}
 	return nil
 }
+
+// https://leetcode-cn.com/problems/max-consecutive-ones/
+// 最大连续1的个数
+func findMaxConsecutiveOnes(nums []int) int {
+	var (
+		t int
+		r int
+	)
+	for i := range nums {
+		if nums[i] == 1 {
+			r++
+			if t < r {
+				t = r
+			}
+		} else {
+			r = 0
+		}
+	}
+	return t
+}
