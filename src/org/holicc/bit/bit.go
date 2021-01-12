@@ -267,6 +267,14 @@ func getSum(a int, b int) int {
 // https://leetcode-cn.com/problems/count-odd-numbers-in-an-interval-range/
 // 在区间范围内统计奇数数目
 func countOdds(low int, high int) int {
+	/*
+	   4种情况
+	   l, r 分别为如下4种情况：
+	   奇数    偶数    返回(h-l)>>1 + 1
+	   奇数    奇数    返回(h-l)>>1 + 1
+	   偶数    偶数    返回(h-l)>>1
+	   偶数    奇数    返回(h-l)>>1 + 1
+	*/
 	if low&1 == 0 && high&1 == 0 {
 		return (high - low) >> 1
 	}
