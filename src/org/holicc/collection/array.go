@@ -1113,3 +1113,19 @@ func findMaxConsecutiveOnes(nums []int) int {
 	}
 	return t
 }
+
+// https://leetcode-cn.com/problems/summary-ranges/
+// 汇总区间
+func summaryRanges(nums []int) (ans []string) {
+	for i, n := 0, len(nums); i < n; {
+		left := i
+		for i++; i < n && nums[i-1]+1 == nums[i]; i++ {
+		}
+		s := strconv.Itoa(nums[left])
+		if left < i-1 {
+			s += "->" + strconv.Itoa(nums[i-1])
+		}
+		ans = append(ans, s)
+	}
+	return
+}
