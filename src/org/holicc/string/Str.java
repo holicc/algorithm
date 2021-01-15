@@ -64,33 +64,51 @@ public class Str {
      */
     public String minNumber(int[] nums) {
         String[] strs = new String[nums.length];
-        for(int i = 0; i < nums.length; i++)
+        for (int i = 0; i < nums.length; i++)
             strs[i] = String.valueOf(nums[i]);
         Arrays.sort(strs, (x, y) -> (x + y).compareTo(y + x));
         StringBuilder res = new StringBuilder();
-        for(String s : strs)
+        for (String s : strs)
             res.append(s);
         return res.toString();
     }
 
-     public  String reverseWords(String s) {
-            List<String> list = Arrays.stream(s.split(" "))
-                    .map(w -> {
-                        char[] chars = w.toCharArray();
-                        for (int i = 0, j = chars.length - 1; i < j; i++, j--) {
-                            char t = chars[i];
-                            chars[i] = chars[j];
-                            chars[j] = t;
-                        }
-                        return new String(chars);
-                    })
-                    .collect(Collectors.toList());
-            StringBuilder builder = new StringBuilder();
-            for (String c : list) {
-                builder.append(c).append(" ");
+    public String reverseWords(String s) {
+        List<String> list = Arrays.stream(s.split(" "))
+                .map(w -> {
+                    char[] chars = w.toCharArray();
+                    for (int i = 0, j = chars.length - 1; i < j; i++, j--) {
+                        char t = chars[i];
+                        chars[i] = chars[j];
+                        chars[j] = t;
+                    }
+                    return new String(chars);
+                })
+                .collect(Collectors.toList());
+        StringBuilder builder = new StringBuilder();
+        for (String c : list) {
+            builder.append(c).append(" ");
+        }
+        builder.deleteCharAt(builder.length() - 1);
+        return builder.toString();
+    }
+
+    /**
+     * 反转字符串 II
+     * <p>
+     * https://leetcode-cn.com/problems/reverse-string-ii/
+     */
+    public String reverseStr(String s, int k) {
+        char[] a = s.toCharArray();
+        for (int start = 0; start < a.length; start += 2 * k) {
+            int i = start, j = Math.min(start + k - 1, a.length - 1);
+            while (i < j) {
+                char tmp = a[i];
+                a[i++] = a[j];
+                a[j--] = tmp;
             }
-            builder.deleteCharAt(builder.length()-1);
-            return builder.toString();
-     }
+        }
+        return new String(a);
+    }
 
 }
