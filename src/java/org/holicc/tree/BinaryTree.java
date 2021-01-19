@@ -242,18 +242,52 @@ public class BinaryTree {
      */
     LinkedList<List<Integer>> res = new LinkedList<>();
     LinkedList<Integer> path = new LinkedList<>();
+
     public List<List<Integer>> pathSum(TreeNode root, int sum) {
         recur(root, sum);
         return res;
     }
+
     void recur(TreeNode root, int tar) {
-        if(root == null) return;
+        if (root == null) return;
         path.add(root.val);
         tar -= root.val;
-        if(tar == 0 && root.left == null && root.right == null)
+        if (tar == 0 && root.left == null && root.right == null)
             res.add(new LinkedList(path));
         recur(root.left, tar);
         recur(root.right, tar);
         path.removeLast();
+    }
+
+    /**
+     * 左叶子之和
+     * <p>
+     * https://leetcode-cn.com/problems/sum-of-left-leaves/
+     */
+    public int sumOfLeftLeaves(TreeNode root) {
+        return root != null ? dfs0(root) : 0;
+    }
+
+    public int dfs0(TreeNode node) {
+        int ans = 0;
+        if (node.left != null) {
+            ans += isLeafNode(node.left) ? node.left.val : dfs0(node.left);
+        }
+        if (node.right != null && !isLeafNode(node.right)) {
+            ans += dfs0(node.right);
+        }
+        return ans;
+    }
+
+    public boolean isLeafNode(TreeNode node) {
+        return node.left == null && node.right == null;
+    }
+
+
+    /**
+     * https://leetcode-cn.com/problems/minimum-distance-between-bst-nodes/
+     */
+    public int minDiffInBST(TreeNode root) {
+
     }
 }
