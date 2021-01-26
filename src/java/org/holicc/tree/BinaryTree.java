@@ -285,9 +285,28 @@ public class BinaryTree {
 
 
     /**
+     * 二叉搜索树节点最小距离
+     * <p>
      * https://leetcode-cn.com/problems/minimum-distance-between-bst-nodes/
      */
+    List<Integer> vals;
     public int minDiffInBST(TreeNode root) {
+        vals = new ArrayList();
+        dfs1(root);
+        Collections.sort(vals);
 
+        int ans = Integer.MAX_VALUE;
+        for (int i = 0; i < vals.size() - 1; ++i)
+            ans = Math.min(ans, vals.get(i+1) - vals.get(i));
+
+        return ans;
     }
+
+    public void dfs1(TreeNode node) {
+        if (node == null) return;
+        vals.add(node.val);
+        dfs1(node.left);
+        dfs1(node.right);
+    }
+
 }

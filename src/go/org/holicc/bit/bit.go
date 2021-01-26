@@ -280,3 +280,15 @@ func countOdds(low int, high int) int {
 	}
 	return (high-low)>>1 + 1
 }
+
+// https://leetcode-cn.com/problems/partitioning-into-minimum-number-of-deci-binary-numbers/solution/1689-shi-er-jin-zhi-shu-de-zui-shao-shu-1snv2/
+// 十-二进制数的最少数目
+func minPartitions(n string) int {
+	max := -1
+	for _, b := range n {
+		if int(b-'0') > max {
+			max = int(b - '0')
+		}
+	}
+	return max
+}
